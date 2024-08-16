@@ -1,23 +1,34 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        "primary-1": "#18a0fb",
-        "primary-2": "#4fb7fc",
-        "primary-3": "#7ecbff",
-        error: "#fe0000",
-        background: "#1d1d1d",
-        surface: "#272727",
-        "on-background": "#f8f8f8",
-        "on-surface": "#ffffff"
-      }
+    content: [
+        "./index.html",
+        "./src/**/*.{js,jsx}",
+    ],
+    theme: {
+        extend: {
+            colors: {
+                primary: "#7a00ec",
+                "on-primary": "#ffffff",
+                secondary: "#512190",
+                "on-secondary": "#e0c9ff",
+                tertiary: "#a80088",
+                "on-tertiary": "#ffffff",
+                error: "#93000a",
+                "on-error": "#ffdad6",
+                surface: "#16111d",
+                "surface-container": "#221d29",
+                "surface-bright": "#3d3744",
+                "on-surface": "#e9dff0",
+                "on-surface-nv": "#cec2d9",
+                "outline": "#978da2",
+                "muted": "#978da2",
+            },
+            fontFamily: {
+                "default": ['"Nunito Sans"', "sans-serif"],
+                "display": ['"Ubuntu Mono"', "monospace"]
+            }
+        },
     },
-  },
-  plugins: [],
+    plugins: [],
 }
 
