@@ -1,21 +1,10 @@
-import Header from "../components/Header";
+import Layout from "../components/Layout";
 
 function Home() {
     return (
-        <>
-            <Header />
-            <Layout>
-                <Repositories />
-            </Layout>
-        </>
-    );
-}
-
-function Layout({ children }) {
-    return (
-        <div className="px-4">
-            { children }
-        </div>
+        <Layout>
+            <Repositories />
+        </Layout>
     );
 }
 
