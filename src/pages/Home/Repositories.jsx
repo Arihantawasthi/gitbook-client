@@ -1,13 +1,3 @@
-import Layout from "../components/Layout";
-
-function Home() {
-    return (
-        <Layout>
-            <Repositories />
-        </Layout>
-    );
-}
-
 function Repositories() {
     return (
         <div className="mt-10">
@@ -19,7 +9,6 @@ function Repositories() {
         </div>
     );
 }
-
 
 function RepositoryCard() {
     return (
@@ -53,4 +42,4 @@ function RepositoryCard() {
 }
 
 
-export default Home;
+export default Repositories;
