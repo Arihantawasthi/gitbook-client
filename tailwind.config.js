@@ -17,10 +17,9 @@ export default {
                 "on-error": "#ffdad6",
                 surface: "#16111d",
                 "surface-container": "#221d29",
-                "surface-bright": "#3d3744",
+                "outline": "#3d3744",
                 "on-surface": "#e9dff0",
                 "on-surface-nv": "#cec2d9",
-                "outline": "#978da2",
                 "muted": "#978da2",
             },
             fontFamily: {
