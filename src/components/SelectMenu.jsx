@@ -6,7 +6,7 @@ function SelectMenu() {
 
     return (
         <div
-            className="relative flex items-center justify-between mt-8 p-2 max-w-36 bg-surface-container text-on-surface rounded-xl shadow-md cursor-pointer"
+            className="relative flex items-center justify-between p-2 max-w-36 bg-surface-container text-on-surface rounded-xl shadow-md cursor-pointer"
             onClick={() => setIsActive(prev => !prev)}
         >
             <div className="flex gap-x-2 items-center">
