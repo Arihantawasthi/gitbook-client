@@ -2,13 +2,13 @@ import Layout from "../../components/Layout";
 import { FileExplorerHeader } from "../../components/FileExplorer";
 import SelectMenu from "../../components/SelectMenu";
 import FileNav from "./FileNav";
+import RepoHeroSection from "../../components/RepoHeroSection";
 
 
 function Tree() {
     return (
         <Layout>
-            <h1 className="text-xl font-bold text-on-surface text-center">Kata Dojo</h1>
-            <p className="text-center">This is a long description</p>
+            <RepoHeroSection />
             <div className="mt-6 flex justify-between items-center">
                 <div className="h-8 w-8 cursor-pointer">
                     <img

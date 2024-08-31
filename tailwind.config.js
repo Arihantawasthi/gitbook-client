@@ -23,7 +23,7 @@ export default {
                 "muted": "#978da2",
             },
             fontFamily: {
-                "default": ['"Nunito Sans"', "sans-serif"],
+                "default": ['Jost', "sans-serif"],
                 "display": ['"Ubuntu Mono"', "monospace"]
             }
         },

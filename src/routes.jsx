@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Repo from "./pages/Repo";
 import Tree from "./pages/Tree";
+import Commits from "./pages/Commits";
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     {
         path: "repo/:repoName/tree",
         element: <Tree />
+    },
+    {
+        path: "repo/:repoName/commits",
+        element: <Commits />
     }
 ]);
 
