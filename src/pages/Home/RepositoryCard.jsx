@@ -1,7 +1,7 @@
 function RepositoryCard({ repo }) {
     return (
         <div
-            className="mt-6 pb-4 w-full text-on-backround rounded-3xl bg-surface-container shadow-lg border-outline"
+            className="mt-6 pb-4 w-full md:max-w-lg text-on-backround rounded-3xl bg-surface-container shadow-lg border-outline"
         >
             <div className="p-4 bg-tertiary text-sm text-on-tertiary rounded-t-3xl">
                 <div className="flex gap-x-2">
