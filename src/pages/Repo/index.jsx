@@ -15,12 +15,15 @@ function Repo() {
     const { repoName } = useParams("repoName");
     const { data, loading, error } = useFetchRepoObjects(repoName);
 
+    if (loading) {
+        return <LoadingScreen />;
+    }
+
     return (
         <Layout>
-            { loading && <LoadingScreen /> }
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
             <div className="flex justify-end">
-                <SelectMenu />
+                <SelectMenu options={data.branches} />
             </div>
             <div className="mt-4 border border-outline rounded-xl">
                 <FileExplorerHeader />

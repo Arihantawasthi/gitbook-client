@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Dropdown from "./Dropdown";
 
-function SelectMenu() {
+
+function SelectMenu({ options }) {
     const [isActive, setIsActive] = useState(false);
+    const [selected, setSelected] = useState(options[0]);
 
     return (
         <div
@@ -16,7 +17,7 @@ function SelectMenu() {
                         src="/public/icons/commit-filled.png"
                     />
                 </div>
-                <p>master</p>
+                <p>{ selected }</p>
             </div>
             <div className="h-6 w-6">
                 <img
@@ -24,7 +25,33 @@ function SelectMenu() {
                     src="/public/icons/arrow-drop-down.png"
                 />
             </div>
-            {isActive ? <Dropdown /> : ""}
+            {isActive && (
+                <div className="absolute top-12 right-0 min-w-48 z-10 rounded-xl border border-outline">
+                    { options.map((item, idx) => <Option key={idx} item={item} setSelected={setSelected} />) }
+                </div>
+            )}
+        </div>
+    );
+}
+
+
+function Option({ item, setSelected }) {
+    const handleSelection = () => {
+        setSelected(item);
+    }
+
+    return (
+        <div
+            className="flex p-3 gap-x-4 items-center bg-surface-container text-on-surface border-b border-outline first:rounded-t-xl last:border-none last:rounded-b-xl cursor-pointer"
+            onClick={handleSelection}
+        >
+            <div className="h-6 w-6">
+                <img
+                    className="h-full w-full object-center object-cover"
+                    src="/public/icons/commit-filled.png"
+                />
+            </div>
+            <p>{ item }</p>
         </div>
     );
 }
