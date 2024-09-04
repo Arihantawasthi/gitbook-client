@@ -16,19 +16,19 @@ function FileExplorerHeader() {
 }
 
 
-function FileExplorerObjects() {
+function FileExplorerObjects({ object }) {
     return (
         <div className="p-4 flex justify-between items-center border-b border-outline last:border-none last:rounded-b-xl font-display text-on-secondary">
             <div className="flex gap-x-2 items-center">
                 <div className="h-5 w-5">
                     <img
                         className="h-full w-full object-center object-cover"
-                        src="/icons/dir-filled.png"
+                        src={object.type == "tree" ? `/icons/dir-filled.png` : `/icons/file-filled.png`}
                     />
                 </div>
-                <p className="underline">go/</p>
+                <p className="underline">{ object.path }</p>
             </div>
-            <p>10B</p>
+            <p>{ object.size == "-" ? "" : `${object.size} B` } </p>
         </div>
     );
 }

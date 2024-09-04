@@ -27,10 +27,7 @@ function Repo() {
             </div>
             <div className="mt-4 border border-outline rounded-xl">
                 <FileExplorerHeader />
-                <FileExplorerObjects />
-                <FileExplorerObjects />
-                <FileExplorerObjects />
-                <FileExplorerObjects />
+                {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} />) }
             </div>
         </Layout>
     );
