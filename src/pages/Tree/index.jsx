@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import { FileExplorerHeader } from "../../components/FileExplorer";
-import SelectMenu from "../../components/SelectMenu";
+import { SelectMenu } from "../../components/SelectMenu";
 import FileNav from "./FileNav";
 import RepoHeroSection from "../../components/RepoHeroSection";
 

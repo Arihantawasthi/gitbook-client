@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 
-function SelectMenu({ options }) {
+function SelectMenu({ children, selectedValue}) {
     const [isActive, setIsActive] = useState(false);
-    const [selected, setSelected] = useState(options[0]);
 
     return (
         <div
@@ -17,7 +16,7 @@ function SelectMenu({ options }) {
                         src="/public/icons/commit-filled.png"
                     />
                 </div>
-                <p>{ selected }</p>
+                <p>{ selectedValue }</p>
             </div>
             <div className="h-6 w-6">
                 <img
@@ -27,7 +26,7 @@ function SelectMenu({ options }) {
             </div>
             {isActive && (
                 <div className="absolute top-12 right-0 min-w-48 z-10 rounded-xl border border-outline">
-                    { options.map((item, idx) => <Option key={idx} item={item} setSelected={setSelected} />) }
+                    { children }
                 </div>
             )}
         </div>
@@ -35,9 +34,9 @@ function SelectMenu({ options }) {
 }
 
 
-function Option({ item, setSelected }) {
+function Option({ item, setSelectedValue }) {
     const handleSelection = () => {
-        setSelected(item);
+        setSelectedValue(item);
     }
 
     return (
@@ -57,4 +56,4 @@ function Option({ item, setSelected }) {
 }
 
 
-export default SelectMenu;
+export { SelectMenu, Option };
