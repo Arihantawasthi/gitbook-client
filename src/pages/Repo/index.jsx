@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import Layout from "../../components/Layout";
-import HeroSection from "./HeroSection";
-import { SelectMenu, Option } from "../../components/SelectMenu";
-import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileExplorer";
-import LoadingScreen from "../../components/LoadingScreen";
+import { useEffect, useState } from "react";
 
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
+import LoadingScreen from "../../components/LoadingScreen";
+import Repo from "./Repo";
 
 
-function Repo() {
+function RepoContainer() {
     const { repoName } = useParams("repoName");
     const { data, loading, error } = useFetchRepoObjects(repoName);
     const [selectedValue, setSelectedValue] = useState("");
@@ -26,20 +22,14 @@ function Repo() {
     }
 
     return (
-        <Layout>
-            {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
-            <div className="flex justify-end">
-                <SelectMenu selectedValue={selectedValue}>
-                    {data.branches.map((item, idx) => <Option key={idx} item={item} setSelectedValue={setSelectedValue}/>)}
-                </SelectMenu>
-            </div>
-            <div className="mt-4 border border-outline rounded-xl">
-                <FileExplorerHeader />
-                {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} />) }
-            </div>
-        </Layout>
+        <Repo
+            data={data}
+            error={error}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+        />
     );
 }
 
 
-export default Repo;
+export default RepoContainer;
