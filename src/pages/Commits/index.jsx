@@ -1,38 +1,16 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import RepoHeroSection from "../../components/RepoHeroSection";
 import LoadingScreen from "../../components/LoadingScreen";
+import { calculatedDeletionBoxes } from "../../utils";
+import useFetchRepoCommits from "../../hooks/useFetchRepoCommits";
 
 
 function Commits() {
     const { repoName } = useParams("repoName");
     const { branch } = useParams("branch");
-
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const fetchRepoCommits = async (repoName, branch) => {
-        try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/logs/${repoName}/${branch}`);
-            if (!response.ok) {
-                throw new Error("Failed to fetch the repository commits");
-            }
-            const data = await response.json();
-            setData(data.data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        fetchRepoCommits(repoName, branch);
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { data, loading, error } = useFetchRepoCommits(repoName, branch);
 
     if (loading) {
         return <LoadingScreen />;
@@ -40,23 +18,16 @@ function Commits() {
 
     return (
         <Layout>
-            <RepoHeroSection />
-            <h1 className="mt-6 text-xl font-bold">Commits</h1>
-            <div className="mt-4">
-                {data.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
-            </div>
+            { error ? "Error: error fetching commits" : (
+                <>
+                    <RepoHeroSection />
+                    <h1 className="mt-6 text-xl font-bold">Commits</h1>
+                    <div className="mt-4">
+                        {data.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
+                    </div>
+                </>
+            )}
         </Layout>
-    );
-}
-
-
-function CommitSign() {
-    return (
-        <div className="ml-4 flex flex-col items-center w-4">
-            <div className="w-1 rounded-t-2xl h-8 bg-primary"></div>
-            <div className="w-4 h-4 rounded-full bg-primary"></div>
-            <div className="w-1 rounded-b-2xl h-8 bg-primary"></div>
-        </div>
     );
 }
 
@@ -68,7 +39,7 @@ function CommitCard({ commitObject }) {
     const renderBoxes = (range, color) => {
         const boxes = [];
         for (let i = 0; i < range; i++) {
-            boxes.push(<div className={`h-2 w-2 ${color}`}></div>)
+            boxes.push(<div key={i} className={`h-2 w-2 ${color}`}></div>)
         }
         return boxes;
     }
@@ -103,13 +74,15 @@ function CommitCard({ commitObject }) {
     );
 }
 
-const calculatedDeletionBoxes = (insertions, deletions) => {
-    const iInsertions = parseInt(insertions);
-    const iDeletions = parseInt(deletions);
 
-    const deletionPercentage = iDeletions / (iInsertions + iDeletions);
-
-    return Math.ceil(deletionPercentage * 6);
+function CommitSign() {
+    return (
+        <div className="ml-4 flex flex-col items-center w-4">
+            <div className="w-1 rounded-t-2xl h-6 bg-primary"></div>
+            <div className="w-4 h-4 rounded-full bg-primary"></div>
+            <div className="w-1 rounded-b-2xl h-6 bg-primary"></div>
+        </div>
+    );
 }
 
 
