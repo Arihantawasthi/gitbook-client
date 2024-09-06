@@ -62,30 +62,54 @@ function CommitSign() {
 
 
 function CommitCard({ commitObject }) {
+    const deletionBoxes = calculatedDeletionBoxes(commitObject.insertions, commitObject.deletions);
+    const insertionBoxes = 6 - deletionBoxes;
+
+    const renderBoxes = (range, color) => {
+        const boxes = [];
+        for (let i = 0; i < range; i++) {
+            boxes.push(<div className={`h-2 w-2 ${color}`}></div>)
+        }
+        return boxes;
+    }
+
     return (
         <>
             <div className="p-4 bg-surface-container rounded-t-2xl shadow-lg">
                 <p className="text-lg font-bold">{ commitObject.commit_message }</p>
                 <p className="text-sm">By { commitObject.commit_author }</p>
-                <div className="mt-4">
-                    <p>
-                        <span className="text-lg font-bold">{ commitObject.files_changed } </span>
+                <div className="mt-4 w-[40%] max-w-[60%]">
+                    <p className="flex justify-between">
+                        <span className="text-lg font-bold">{ commitObject.files_changed }</span>
                         Files Changed
                     </p>
-                    <p>
+                    <p className="flex justify-between">
                         <span className="text-lg font-bold text-green-500">{ commitObject.insertions } </span>
                         Insertions (+)
                     </p>
-                    <p>
+                    <p className="flex justify-between">
                         <span className="text-lg font-bold text-red-500">{ commitObject.deletions } </span>
                         Deletions (-)
                     </p>
                 </div>
+                <div className="mt-2 flex justify-end items-center gap-x-1">
+                    {renderBoxes(insertionBoxes, "bg-green-500")}
+                    {renderBoxes(deletionBoxes, "bg-red-500")}
+                </div>
             </div>
-            <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: 21 July, 2024</p>
+            <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: { commitObject.commit_timestamp }</p>
             <CommitSign />
         </>
     );
+}
+
+const calculatedDeletionBoxes = (insertions, deletions) => {
+    const iInsertions = parseInt(insertions);
+    const iDeletions = parseInt(deletions);
+
+    const deletionPercentage = iDeletions / (iInsertions + iDeletions);
+
+    return Math.ceil(deletionPercentage * 6);
 }
 
 
