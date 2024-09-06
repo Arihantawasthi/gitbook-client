@@ -15,7 +15,7 @@ function Repo({ data, error, selectedValue, onClick }) {
                 </SelectMenu>
             </div>
             <div className="mt-4 border border-outline rounded-xl">
-                <FileExplorerHeader />
+                <FileExplorerHeader repo={data.name} branch={selectedValue} />
                 {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} />) }
             </div>
         </Layout>

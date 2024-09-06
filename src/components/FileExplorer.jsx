@@ -1,4 +1,7 @@
-function FileExplorerHeader() {
+import { Link } from "react-router-dom";
+
+
+function FileExplorerHeader({ repo, branch }) {
     return (
         <div className="p-4 flex justify-between items-center bg-surface-container rounded-t-xl w-full">
             <p className="font-display w-2/3 overflow-hidden whitespace-nowrap overflow-ellipsis">./go/structures/sub-structures/structures-with-tree</p>
@@ -9,7 +12,12 @@ function FileExplorerHeader() {
                         src="/icons/history-filled.png"
                     />
                 </div>
-                <p className="underline cursor-pointer">Commits</p>
+                <Link
+                    className="underline cursor-pointer"
+                    to={`/repo/commits/${repo}/${branch}`}
+                >
+                    Commits
+                </Link>
             </div>
         </div>
     );
