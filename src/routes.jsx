@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <Tree />
     },
     {
-        path: "repo/:repoName/commits",
+        path: "repo/commits/:repoName/:branch",
         element: <Commits />
     }
 ]);
