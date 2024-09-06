@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         element: <Home />
     },
     {
-        path: "repo/:repoName",
+        path: "repo/:repoName/:branch",
         element: <RepoContainer />
     },
     {

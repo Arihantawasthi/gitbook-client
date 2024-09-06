@@ -34,15 +34,11 @@ function SelectMenu({ children, selectedValue}) {
 }
 
 
-function Option({ item, setSelectedValue }) {
-    const handleSelection = () => {
-        setSelectedValue(item);
-    }
-
+function Option({ item, onClick }) {
     return (
         <div
             className="flex p-3 gap-x-4 items-center bg-surface-container text-on-surface border-b border-outline first:rounded-t-xl last:border-none last:rounded-b-xl cursor-pointer"
-            onClick={handleSelection}
+            onClick={() => onClick(item)}
         >
             <div className="h-6 w-6">
                 <img

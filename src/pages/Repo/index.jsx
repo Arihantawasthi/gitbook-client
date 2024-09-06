@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 import LoadingScreen from "../../components/LoadingScreen";
@@ -7,18 +7,20 @@ import Repo from "./Repo";
 
 
 function RepoContainer() {
+    const navigate = useNavigate();
     const { repoName } = useParams("repoName");
-    const { data, loading, error } = useFetchRepoObjects(repoName);
-    const [selectedValue, setSelectedValue] = useState("");
-
-    useEffect(() => {
-        if (data.branches) {
-            setSelectedValue(data.branches[0]);
-        }
-    }, [data.branches])
+    const { branch } = useParams("branch");
+    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch);
+    const [selectedValue, setSelectedValue] = useState(branch);
 
     if (loading) {
         return <LoadingScreen />;
+    }
+
+    const onClick = (branch) => {
+        setSelectedValue(branch);
+        navigate(`/repo/${repoName}/${branch}`);
+        fetchRepoObjects(repoName, branch);
     }
 
     return (
@@ -26,7 +28,7 @@ function RepoContainer() {
             data={data}
             error={error}
             selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
+            onClick={onClick}
         />
     );
 }

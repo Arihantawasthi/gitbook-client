@@ -5,13 +5,13 @@ import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileEx
 
 
 
-function Repo({ data, error, selectedValue, setSelectedValue }) {
+function Repo({ data, error, selectedValue, onClick }) {
     return (
         <Layout>
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
             <div className="flex justify-end">
                 <SelectMenu selectedValue={selectedValue}>
-                    {data.branches.map((item, idx) => <Option key={idx} item={item} setSelectedValue={setSelectedValue}/>)}
+                    {data.branches.map((item, idx) => <Option key={idx} item={item} onClick={onClick} />)}
                 </SelectMenu>
             </div>
             <div className="mt-4 border border-outline rounded-xl">

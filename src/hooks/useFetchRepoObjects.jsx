@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
 
-const useFetchRepoObjects = (repoName) => {
+const useFetchRepoObjects = (repoName, branch) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchRepoObjects = async () => {
+    const fetchRepoObjects = async (repoName, branch) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/tree/metadata/master/`);
+            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/tree/metadata/${branch}/`);
             if (!response.ok) {
                 throw new Error("Failed to fetch the repository objects");
             }
@@ -22,11 +22,12 @@ const useFetchRepoObjects = (repoName) => {
     }
 
     useEffect(() => {
-        fetchRepoObjects();
+        fetchRepoObjects(repoName, branch);
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return { data, loading, error };
+
+    return { data, loading, error, fetchRepoObjects};
 }
 
 
