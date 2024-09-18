@@ -10,7 +10,7 @@ function RepoContainer() {
     const navigate = useNavigate();
     const { repoName } = useParams("repoName");
     const { branch } = useParams("branch");
-    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch);
+    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "tree", "");
     const [selectedValue, setSelectedValue] = useState(branch);
 
     if (loading) {
@@ -20,7 +20,14 @@ function RepoContainer() {
     const onClick = (branch) => {
         setSelectedValue(branch);
         navigate(`/repo/${repoName}/${branch}`);
-        fetchRepoObjects(repoName, branch);
+        fetchRepoObjects(repoName, branch, "tree", "");
+    }
+
+    const updateRepo = (type, fullPath) => {
+        if (type === 'tree') {
+            navigate(`/repo/${repoName}/${branch}/${type}/${fullPath}`);
+            fetchRepoObjects(repoName, branch, type, fullPath+"/");
+        }
     }
 
     return (
@@ -29,6 +36,7 @@ function RepoContainer() {
             error={error}
             selectedValue={selectedValue}
             onClick={onClick}
+            updateRepo={updateRepo}
         />
     );
 }
