@@ -24,7 +24,7 @@ const useFetchRepoObjects = (repoName, branch, type, path) => {
     useEffect(() => {
         fetchRepoObjects(repoName, branch, type, path);
         //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [path]);
 
 
     return { data, loading, error, fetchRepoObjects};

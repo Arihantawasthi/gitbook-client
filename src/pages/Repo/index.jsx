@@ -19,7 +19,7 @@ function RepoContainer() {
         }
         const codePathSplit = pathSplits.slice(6, pathSplits.length);
         console.log(codePathSplit);
-        const codePath = "/"+codePathSplit.join("/")
+        const codePath = codePathSplit.join("/")
         console.log(codePath);
         return codePath;
     }
