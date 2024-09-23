@@ -5,10 +5,11 @@ const useFetchRepoObjects = (repoName, branch, type, path) => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const tailPath = path ? path + "/" : "";
 
-    const fetchRepoObjects = async (repoName, branch, type, path) => {
+    const fetchRepoObjects = async (repoName, branch, type, tailPath) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${path}`);
+            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
             if (!response.ok) {
                 throw new Error("Failed to fetch the repository objects");
             }
@@ -22,7 +23,7 @@ const useFetchRepoObjects = (repoName, branch, type, path) => {
     }
 
     useEffect(() => {
-        fetchRepoObjects(repoName, branch, type, path);
+        fetchRepoObjects(repoName, branch, type, tailPath);
         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path]);
 
