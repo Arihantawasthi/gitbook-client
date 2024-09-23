@@ -37,7 +37,7 @@ function RepoContainer() {
         <Repo
             data={data}
             error={error}
-            selectedValue={selectedValue}
+            branch={selectedValue}
             onClick={onClick}
             updateRepo={updateRepo}
         />
