@@ -5,7 +5,7 @@ import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileEx
 
 
 
-function Repo({ data, error, selectedValue, onClick }) {
+function Repo({ data, error, selectedValue, onClick, updateRepo}) {
     return (
         <Layout>
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
@@ -15,8 +15,8 @@ function Repo({ data, error, selectedValue, onClick }) {
                 </SelectMenu>
             </div>
             <div className="mt-4 border border-outline rounded-xl">
-                <FileExplorerHeader repo={data.name} branch={selectedValue} />
-                {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} />) }
+                <FileExplorerHeader />
+                {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} updateRepo={updateRepo} />) }
             </div>
         </Layout>
     );
