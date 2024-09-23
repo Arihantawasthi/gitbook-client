@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
@@ -8,14 +8,30 @@ import Repo from "./Repo";
 
 function RepoContainer() {
     const navigate = useNavigate();
+    const location = useLocation().pathname;
     const { repoName } = useParams("repoName");
     const { branch } = useParams("branch");
-    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "tree", "");
+    const getDirPath = (path) => {
+        const pathSplits = path.split("/");
+        if (pathSplits.length <= 5) {
+            console.log("");
+            return ""
+        }
+        const codePathSplit = pathSplits.slice(6, pathSplits.length);
+        console.log(codePathSplit);
+        const codePath = "/"+codePathSplit.join("/")
+        console.log(codePath);
+        return codePath;
+    }
+    const path = getDirPath(location);
+    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "tree", path);
     const [selectedValue, setSelectedValue] = useState(branch);
+
 
     if (loading) {
         return <LoadingScreen />;
     }
+
 
     const onClick = (branch) => {
         setSelectedValue(branch);
@@ -25,7 +41,7 @@ function RepoContainer() {
 
     const updateRepo = (type, fullPath) => {
         if (type === 'tree') {
-            navigate(`/repo/${repoName}/${branch}/${type}/${fullPath}`);
+            navigate(`/repo/metadata/${repoName}/${branch}/${type}/${fullPath}`);
             fetchRepoObjects(repoName, branch, type, fullPath+"/");
         }
     }

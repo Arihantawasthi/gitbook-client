@@ -11,15 +11,15 @@ const router = createBrowserRouter([
         element: <Home />
     },
     {
-        path: "repo/:repoName/:branch/*",
+        path: "repo/metadata/:repoName/:branch/*",
         element: <RepoContainer />
     },
     {
-        path: "repo/:repoName/tree",
+        path: "repo/tree/:repoName",
         element: <Tree />
     },
     {
-        path: "repo/:repoName/commits",
+        path: "repo/commits/:repoName",
         element: <Commits />
     }
 ]);
