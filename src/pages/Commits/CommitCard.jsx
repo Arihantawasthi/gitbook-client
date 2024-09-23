@@ -16,14 +16,18 @@ function CommitCard({ commitObject }) {
     return (
         <>
             <div className="p-4 bg-surface-container rounded-t-2xl shadow-lg">
-                <p className="text-lg font-bold">{ commitObject.commit_message }</p>
-                <p className="text-sm">By { commitObject.commit_author }</p>
-                <div className="mt-4 w-[40%] max-w-[60%]">
-                    <CardStatInfo value={commitObject.files_changed} label="Files Changed" />
-                    <CardStatInfo value={commitObject.deletions} label="Deletions (--)" color="text-red-500" />
-                    <CardStatInfo value={commitObject.insertions} label="Insertions (+)" color="text-green-500" />
+                <div className="flex flex-col gap-y-4 md:flex-row md:justify-between">
+                    <div>
+                        <p className="text-lg font-bold">{ commitObject.commit_message }</p>
+                        <p className="text-sm">By { commitObject.commit_author }</p>
+                    </div>
+                    <div className="w-full md:w-[50%] lg:w-[40%] flex flex-row gap-x-4 justify-between items-center">
+                        <CardStatInfo value={commitObject.files_changed} label="Files Changed" />
+                        <CardStatInfo value={commitObject.deletions} label="Deletions (--)" color="text-red-500" />
+                        <CardStatInfo value={commitObject.insertions} label="Insertions (+)" color="text-green-500" />
+                    </div>
                 </div>
-                <div className="mt-2 flex justify-end items-center gap-x-1">
+                <div className="mt-2 md:mt-6 flex justify-end items-center gap-x-1">
                     {renderBoxes(insertionBoxes, "bg-green-500")}
                     {renderBoxes(deletionBoxes, "bg-red-500")}
                 </div>
@@ -37,8 +41,8 @@ function CommitCard({ commitObject }) {
 
 function CardStatInfo({ value, label, color="" }) {
     return (
-        <p className="flex justify-between">
-            <span className={`text-lg font-bold ${color}`}>{ value }</span>
+        <p className="flex justify-between flex-col gap-y-1">
+            <span className={`text-lg md:text-center font-bold ${color}`}>{ value }</span>
             { label }
         </p>
     );

@@ -22,7 +22,7 @@ function Commits() {
                 <>
                     <RepoHeroSection />
                     <h1 className="mt-6 text-xl font-bold">Commits</h1>
-                    <div className="mt-4">
+                    <div className="mt-4 flex flex-col">
                         {data.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
                     </div>
                 </>
