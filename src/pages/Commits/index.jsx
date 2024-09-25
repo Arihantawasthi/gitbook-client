@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import Layout from "../../components/Layout";
-import RepoHeroSection from "../../components/RepoHeroSection";
+import RepoDesc from "../../components/RepoDesc";
 import LoadingScreen from "../../components/LoadingScreen";
 import useFetchRepoCommits from "../../hooks/useFetchRepoCommits";
 import CommitCard from "./CommitCard";
@@ -20,10 +20,10 @@ function Commits() {
         <Layout>
             { error ? "Error: error fetching commits" : (
                 <>
-                    <RepoHeroSection />
+                    <RepoDesc repoName={data.repoName} repoDesc={data.repoDesc} />
                     <h1 className="mt-6 text-xl font-bold">Commits</h1>
                     <div className="mt-4 flex flex-col">
-                        {data.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
+                        {data.logs.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
                     </div>
                 </>
             )}

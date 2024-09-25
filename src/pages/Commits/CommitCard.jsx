@@ -27,7 +27,7 @@ function CommitCard({ commitObject }) {
                         <CardStatInfo value={commitObject.insertions} label="Insertions (+)" color="text-green-500" />
                     </div>
                 </div>
-                <div className="mt-2 md:mt-6 flex justify-end items-center gap-x-1">
+                <div className="mt-4 md:mt-6 flex justify-end items-center gap-x-1">
                     {renderBoxes(insertionBoxes, "bg-green-500")}
                     {renderBoxes(deletionBoxes, "bg-red-500")}
                 </div>
@@ -41,8 +41,8 @@ function CommitCard({ commitObject }) {
 
 function CardStatInfo({ value, label, color="" }) {
     return (
-        <p className="flex justify-between flex-col gap-y-1">
-            <span className={`text-lg md:text-center font-bold ${color}`}>{ value }</span>
+        <p className="flex justify-between flex-col text-sm md:text-md">
+            <span className={`text-lg text-center font-bold ${color}`}>{ value }</span>
             { label }
         </p>
     );
