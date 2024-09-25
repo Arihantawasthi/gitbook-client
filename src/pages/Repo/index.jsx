@@ -28,9 +28,11 @@ function RepoContainer() {
 
     const updateRepo = (type, fullPath) => {
         if (type === 'tree') {
-            navigate(`/repo/metadata/${repoName}/${branch}/${type}/${fullPath}`);
-            fetchRepoObjects(repoName, branch, type, fullPath+"/");
+            navigate(`/repo/metadata/${repoName}/${branch}/${type}/${fullPath}`, {relative: "path"});
+            return null;
         }
+        navigate(`/repo/tree/${repoName}`, {relative: "path"});
+        return null;
     }
 
     return (
