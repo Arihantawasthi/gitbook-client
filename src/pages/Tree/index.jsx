@@ -1,11 +1,21 @@
+import { useLocation, useParams } from "react-router-dom";
+
 import Layout from "../../components/Layout";
 import { FileExplorerHeader } from "../../components/FileExplorer";
 import { SelectMenu } from "../../components/SelectMenu";
 import FileNav from "./FileNav";
 import RepoDesc from "../../components/RepoDesc";
+import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
+import { getDirPath } from "../../utils";
 
 
 function Tree() {
+    const location = useLocation().pathname;
+    const { repoName } = useParams("repoName");
+    const { branch }= useParams("branch");
+    const path = getDirPath(location);
+    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "blob", path);
+
     return (
         <Layout>
             <RepoDesc repoName={"Dummy Name"} repoDesc={"Dummy Description"} />

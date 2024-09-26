@@ -31,7 +31,7 @@ function RepoContainer() {
             navigate(`/repo/metadata/${repoName}/${branch}/${type}/${fullPath}`, {relative: "path"});
             return null;
         }
-        navigate(`/repo/tree/${repoName}`, {relative: "path"});
+        navigate(`/repo/tree/${repoName}/${branch}/${type}/${fullPath}`, {relative: "path"});
         return null;
     }
 
