@@ -38,6 +38,7 @@ function RepoContainer() {
     return (
         <Repo
             data={data}
+            path={path}
             error={error}
             branch={selectedValue}
             onClick={onClick}

@@ -4,8 +4,7 @@ import { SelectMenu, Option } from "../../components/SelectMenu";
 import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileExplorer";
 
 
-
-function Repo({ data, error, branch, onClick, updateRepo}) {
+function Repo({ data, path, error, branch, onClick, updateRepo}) {
     return (
         <Layout>
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
@@ -15,7 +14,7 @@ function Repo({ data, error, branch, onClick, updateRepo}) {
                 </SelectMenu>
             </div>
             <div className="mt-4 border border-outline rounded-xl">
-                <FileExplorerHeader repo={data.name} branch={branch} />
+                <FileExplorerHeader repo={data.name} branch={branch} path={path} />
                 {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} updateRepo={updateRepo} />) }
             </div>
         </Layout>

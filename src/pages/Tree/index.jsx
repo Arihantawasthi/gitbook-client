@@ -7,6 +7,7 @@ import FileNav from "./FileNav";
 import RepoDesc from "../../components/RepoDesc";
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 import { getDirPath } from "../../utils";
+import LoadingScreen from "../../components/LoadingScreen";
 
 
 function Tree() {
@@ -16,9 +17,13 @@ function Tree() {
     const path = getDirPath(location);
     const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "blob", path);
 
+    if (loading) {
+        return <LoadingScreen />
+    }
+
     return (
         <Layout>
-            <RepoDesc repoName={"Dummy Name"} repoDesc={"Dummy Description"} />
+            <RepoDesc repoName={data.name} repoDesc={data.desc} />
             <div className="mt-6 flex justify-between items-center">
                 <div className="h-8 w-8 cursor-pointer">
                     <img
@@ -29,8 +34,8 @@ function Tree() {
                 <SelectMenu />
             </div>
             <div className="mt-2">
-                <FileExplorerHeader />
-                <CodeLine />
+                <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
+                { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
             </div>
             <FileNav />
         </Layout>
@@ -38,11 +43,11 @@ function Tree() {
 }
 
 
-function CodeLine() {
+function CodeLine({ lineNumber, lineContent }) {
     return (
         <div className="flex font-display">
-            <p className="px-2 bg-surface-container">1</p>
-            <p className="pl-2 bg-[#000] w-full">package arrays</p>
+            <p className="px-2 bg-surface-container">{ lineNumber }</p>
+            <p className="pl-2 bg-[#000] w-full">{ lineContent }</p>
         </div>
     );
 }

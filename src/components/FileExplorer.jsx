@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 
-function FileExplorerHeader({ repo, branch }) {
+function FileExplorerHeader({ repo, branch, path }) {
     return (
         <div className="p-4 flex justify-between items-center bg-surface-container rounded-t-xl w-full">
-            <p className="font-display w-2/3 overflow-hidden whitespace-nowrap overflow-ellipsis">./go/structures/sub-structures/structures-with-tree</p>
+            <p className="font-display w-2/3 overflow-hidden whitespace-nowrap overflow-ellipsis">{ path ? "./"+path : "./" }</p>
             <div className="flex gap-x-1 items-center">
                 <div className="h-5 w-5">
                     <img
