@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function RepositoryCard({ repo }) {
     return (
-        <Link to={`repo/${repo.name}`}>
+        <Link to={`repo/metadata/${repo.name}/master`}>
             <div className="mt-6 w-full md:max-w-lg text-on-backround rounded-3xl bg-surface-container shadow-lg border-outline cursor-pointer">
                 <div className="p-4 bg-tertiary text-on-tertiary rounded-t-3xl">
                     <div className="flex gap-x-2">
