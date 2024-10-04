@@ -1,27 +1,68 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import LoadingScreen from "../../components/LoadingScreen";
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 
 
+const createFileNavState = (objects) => {
+    const nestedFileObjects = [];
+    objects.forEach((obj) => {
+        const nestedFileObject = {}
+        nestedFileObject.id = Math.random().toString(36).substring(2, 10)
+        nestedFileObject.type = obj.type
+        nestedFileObject.path = obj.path
+        nestedFileObject.fullPath = obj.fullPath
+        nestedFileObject.size = obj.size
+        nestedFileObject.objects = []
+        nestedFileObjects.push(nestedFileObject);
+    })
+    return nestedFileObjects;
+}
+
+const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
+    for (let i = 0; i < objects.length; i++) {
+        if (objects[i].id === objectId) {
+            objects[i].objects = newObjects
+            return objects
+        }
+        if (i == objects.length - 1)
+            return addNewObjectsInFileNav(objectId, objects[i].objects, objects)
+    }
+
+    return objects
+}
+
 function FileNav({ repoName, selectedBranch }) {
-    const navigate = useNavigate();
     const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, selectedBranch, "tree", "");
 
     if (loading) {
         return <LoadingScreen />
     }
 
-    const fetchNewPath = (type, fullPath) => {
-        console.log(fullPath);
+    let objects = createFileNavState(data.objects);
+    const fetchNewPath = async (objectId, type, fullPath) => {
         if (type === 'tree') {
-            return null;
+            try {
+                const tailPath = fullPath ? fullPath + "/" : "";
+                const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${selectedBranch}/${tailPath}`)
+                if (!response.ok) {
+                    throw new Error("Failed to fetch the repository objects");
+                }
+                const data = await response.json();
+                console.log(data.data.objects);
+                const newObjects = createFileNavState(data.data.objects)
+                objects = addNewObjectsInFileNav(objectId, newObjects, objects)
+                console.log(objects);
+            } catch (err) {
+                console.log(err);
+            }
         }
         return null;
     }
 
     return (
         <div className="absolute py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
-            {data.objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+            {objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
         </div>
     );
 }
@@ -29,26 +70,29 @@ function FileNav({ repoName, selectedBranch }) {
 
 function FileNavItem({ object, fetchNewPath }) {
     return (
-        <section
-            className="flex my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
-            onClick={() => fetchNewPath(object.type, object.fullPath)}
-        >
-            <div className="flex gap-x-1 items-center">
-                <div className="h-5 w-5">
-                    <img
-                        className="h-full w-full object-center object-cover"
-                        src="/icons/arrow-right.png"
-                    />
+        <div>
+            <section
+                className="flex my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
+                onClick={() => fetchNewPath(object.id, object.type, object.fullPath)}
+            >
+                <div className="flex gap-x-1 items-center">
+                    <div className="h-5 w-5">
+                        <img
+                            className="h-full w-full object-center object-cover"
+                            src="/icons/arrow-right.png"
+                        />
+                    </div>
+                    <div className="h-6 w-6">
+                        <img
+                            className="h-full w-full object-center object-cover"
+                            src={object.type == "tree" ? "/icons/dir-filled.png" : "/icons/file-filled.png"}
+                        />
+                    </div>
                 </div>
-                <div className="h-6 w-6">
-                    <img
-                        className="h-full w-full object-center object-cover"
-                        src={object.type == "tree" ? "/icons/dir-filled.png" : "/icons/file-filled.png"}
-                    />
-                </div>
-            </div>
-            <p>{ object.path }</p>
-        </section>
+                <p>{ object.path }</p>
+            </section>
+            {object.objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+        </div>
     );
 }
 
