@@ -22,7 +22,7 @@ function RepoContainer() {
 
     const onClick = (branch) => {
         setSelectedValue(branch);
-        navigate(`/repo/${repoName}/${branch}`);
+        navigate(`/repo/metadata/${repoName}/${branch}/tree`);
         fetchRepoObjects(repoName, branch, "tree", "");
     }
 

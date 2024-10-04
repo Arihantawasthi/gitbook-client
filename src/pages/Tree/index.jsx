@@ -31,13 +31,13 @@ function Tree() {
                         src="/icons/menu-filled.png"
                     />
                 </div>
-                <SelectMenu />
+                <SelectMenu selectedValue={branch} />
             </div>
             <div className="mt-2">
                 <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
                 { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
             </div>
-            <FileNav />
+            <FileNav repoName={data.name} selectedBranch={branch} />
         </Layout>
     );
 }
