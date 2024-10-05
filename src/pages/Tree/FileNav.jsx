@@ -25,10 +25,8 @@ const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
             objects[i].objects = newObjects
             return objects
         }
-        if (i == objects.length - 1)
-            return addNewObjectsInFileNav(objectId, objects[i].objects, objects)
+        addNewObjectsInFileNav(objectId, newObjects, objects[i].objects)
     }
-
     return objects
 }
 
@@ -52,7 +50,7 @@ function FileNav({ repoName, selectedBranch }) {
                 console.log(data.data.objects);
                 const newObjects = createFileNavState(data.data.objects)
                 objects = addNewObjectsInFileNav(objectId, newObjects, objects)
-                console.log(objects);
+                console.log("objects", objects);
             } catch (err) {
                 console.log(err);
             }
@@ -61,7 +59,7 @@ function FileNav({ repoName, selectedBranch }) {
     }
 
     return (
-        <div className="absolute py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
+        <div className="fixed py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
             {objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
         </div>
     );
