@@ -9,7 +9,7 @@ const useFetchFileNavObjects = (repoName, branch, type, path) => {
     const [error, setError] = useState(null);
     const tailPath = path? path + "/" : ""
 
-    const fetchFileNavObjects = async (repoName, branch, type, tailPath, objectId='') => {
+    const fetchFileNavObjects = async (repoName, branch, type, tailPath, objectId='', prevObjects=[]) => {
         try {
             const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
             if (!response.ok) {
@@ -17,11 +17,11 @@ const useFetchFileNavObjects = (repoName, branch, type, path) => {
             }
             const data = await response.json();
             let objects = createFileNavState(data.data.objects)
-            if (objectId === '') {
+            if (objectId === '' || prevObjects.length == 0) {
                 setData(objects)
                 return
             }
-            objects = addNewObjectsInFileNav(objectId, objects, data)
+            objects = addNewObjectsInFileNav(objectId, objects, prevObjects)
             setData([...data, data.data.objects])
         } catch (err) {
             setError(err.message)
@@ -54,6 +54,7 @@ const createFileNavState = (objects) => {
 }
 
 const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
+    console.log(newObjects, objects)
     for (let i = 0; i < objects.length; i++) {
         if (objects[i].id === objectId) {
             objects[i].objects = newObjects
@@ -73,9 +74,12 @@ function FileNav({ repoName, selectedBranch }) {
     }
 
     const fetchNewPath = async (objectId, type, fullPath) => {
+        console.log("HERE");
+        console.log(objectId, type, fullPath);
         if (type === 'tree') {
+            console.log("HERE AS WELL");
             const tailPath = fullPath ? fullPath + "/" : "";
-            await fetchFileNavObjects(repoName, selectedBranch, type, tailPath, objectId)
+            await fetchFileNavObjects(repoName, selectedBranch, type, tailPath, objectId, data)
         }
         return null;
     }
@@ -90,9 +94,9 @@ function FileNav({ repoName, selectedBranch }) {
 
 function FileNavItem({ object, fetchNewPath }) {
     return (
-        <div>
+        <div className="ml-8">
             <section
-                className="flex my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
+                className="flex -ml-8 my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
                 onClick={() => fetchNewPath(object.id, object.type, object.fullPath)}
             >
                 <div className="flex gap-x-1 items-center">
