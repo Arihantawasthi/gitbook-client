@@ -22,7 +22,7 @@ const useFetchFileNavObjects = (repoName, branch, type, path) => {
                 return
             }
             objects = addNewObjectsInFileNav(objectId, objects, prevObjects)
-            setData([...data, data.data.objects])
+            setData([...objects])
         } catch (err) {
             setError(err.message)
         } finally {
@@ -62,20 +62,19 @@ const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
         }
         addNewObjectsInFileNav(objectId, newObjects, objects[i].objects)
     }
-    return objects
+    console.log("HERE");
+    console.log(objects);
+    return objects;
 }
 
 function FileNav({ repoName, selectedBranch }) {
     const { data, loading, error, fetchFileNavObjects } = useFetchFileNavObjects(repoName, selectedBranch, "tree", "");
 
-    console.log(data);
     if (loading) {
         return <LoadingScreen />
     }
 
     const fetchNewPath = async (objectId, type, fullPath) => {
-        console.log("HERE");
-        console.log(objectId, type, fullPath);
         if (type === 'tree') {
             console.log("HERE AS WELL");
             const tailPath = fullPath ? fullPath + "/" : "";
@@ -83,6 +82,8 @@ function FileNav({ repoName, selectedBranch }) {
         }
         return null;
     }
+
+    console.log(data)
 
     return (
         <div className="fixed py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
