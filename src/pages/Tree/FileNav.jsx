@@ -1,8 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import LoadingScreen from "../../components/LoadingScreen";
-import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 
+
+const useFetchFileNavObjects = (repoName, branch, type, path) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const tailPath = path? path + "/" : ""
+
+    const fetchFileNavObjects = async (repoName, branch, type, tailPath, objectId='') => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch the repository objects")
+            }
+            const data = await response.json();
+            let objects = createFileNavState(data.data.objects)
+            if (objectId === '') {
+                setData(objects)
+                return
+            }
+            objects = addNewObjectsInFileNav(objectId, objects, data)
+            setData([...data, data.data.objects])
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        fetchFileNavObjects(repoName, branch, type, tailPath);
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path]);
+
+    return { data, loading, error, fetchFileNavObjects };
+}
 
 const createFileNavState = (objects) => {
     const nestedFileObjects = [];
@@ -31,36 +65,24 @@ const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
 }
 
 function FileNav({ repoName, selectedBranch }) {
-    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, selectedBranch, "tree", "");
+    const { data, loading, error, fetchFileNavObjects } = useFetchFileNavObjects(repoName, selectedBranch, "tree", "");
 
+    console.log(data);
     if (loading) {
         return <LoadingScreen />
     }
 
-    let objects = createFileNavState(data.objects);
     const fetchNewPath = async (objectId, type, fullPath) => {
         if (type === 'tree') {
-            try {
-                const tailPath = fullPath ? fullPath + "/" : "";
-                const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${selectedBranch}/${tailPath}`)
-                if (!response.ok) {
-                    throw new Error("Failed to fetch the repository objects");
-                }
-                const data = await response.json();
-                console.log(data.data.objects);
-                const newObjects = createFileNavState(data.data.objects)
-                objects = addNewObjectsInFileNav(objectId, newObjects, objects)
-                console.log("objects", objects);
-            } catch (err) {
-                console.log(err);
-            }
+            const tailPath = fullPath ? fullPath + "/" : "";
+            await fetchFileNavObjects(repoName, selectedBranch, type, tailPath, objectId)
         }
         return null;
     }
 
     return (
         <div className="fixed py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
-            {objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+            {data.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
         </div>
     );
 }
