@@ -17,3 +17,13 @@ body {
     color: #e9dff0;
     min-height: 100vh;
 }
+
+@keyframes open-filenav {
+    from {bottom: -200px;}
+    to {bottom: 0;}
+}
+
+.filenav-open-anim {
+    animation-name: open-filenav;
+    animation-duration: 0.2s;
+}

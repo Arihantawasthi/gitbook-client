@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import Layout from "../../components/Layout";
@@ -11,11 +12,12 @@ import LoadingScreen from "../../components/LoadingScreen";
 
 
 function Tree() {
+    const [isExplorerActive, setIsExplorerActive] = useState(false);
     const location = useLocation().pathname;
     const { repoName } = useParams("repoName");
     const { branch }= useParams("branch");
     const path = getDirPath(location);
-    const { data, loading, error, fetchRepoObjects } = useFetchRepoObjects(repoName, branch, "blob", path);
+    const { data, loading, error } = useFetchRepoObjects(repoName, branch, "blob", path);
 
     if (loading) {
         return <LoadingScreen />
@@ -25,7 +27,10 @@ function Tree() {
         <Layout>
             <RepoDesc repoName={data.name} repoDesc={data.desc} />
             <div className="mt-6 flex justify-between items-center">
-                <div className="h-8 w-8 cursor-pointer">
+                <div
+                    className="h-8 w-8 cursor-pointer"
+                    onClick={() => setIsExplorerActive(!isExplorerActive)}
+                >
                     <img
                         className="h-full w-full object-center object-cover"
                         src="/icons/menu-filled.png"
@@ -37,7 +42,13 @@ function Tree() {
                 <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
                 { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
             </div>
-            <FileNav repoName={data.name} selectedBranch={branch} />
+            {isExplorerActive &&
+                <FileNav
+                    repoName={data.name}
+                    selectedBranch={branch}
+                    toggleNav={setIsExplorerActive}
+                />
+            }
         </Layout>
     );
 }
