@@ -4,7 +4,7 @@ function Layout({ children }) {
     return (
         <>
             <Header />
-            <div className="px-4 mt-10">
+            <div className="px-4 my-10">
                 { children }
             </div>
         </>
