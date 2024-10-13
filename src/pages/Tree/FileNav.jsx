@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import LoadingScreen from "../../components/LoadingScreen";
+import { useNavigate } from "react-router-dom";
 
 
 const useFetchFileNavObjects = (repoName, branch, type, path) => {
@@ -54,7 +55,6 @@ const createFileNavState = (objects) => {
 }
 
 const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
-    console.log(newObjects, objects)
     for (let i = 0; i < objects.length; i++) {
         if (objects[i].id === objectId) {
             objects[i].objects = newObjects
@@ -62,12 +62,11 @@ const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
         }
         addNewObjectsInFileNav(objectId, newObjects, objects[i].objects)
     }
-    console.log("HERE");
-    console.log(objects);
     return objects;
 }
 
 function FileNav({ repoName, selectedBranch }) {
+    const navigate = useNavigate();
     const { data, loading, error, fetchFileNavObjects } = useFetchFileNavObjects(repoName, selectedBranch, "tree", "");
 
     if (loading) {
@@ -76,14 +75,13 @@ function FileNav({ repoName, selectedBranch }) {
 
     const fetchNewPath = async (objectId, type, fullPath) => {
         if (type === 'tree') {
-            console.log("HERE AS WELL");
             const tailPath = fullPath ? fullPath + "/" : "";
             await fetchFileNavObjects(repoName, selectedBranch, type, tailPath, objectId, data)
+            return
         }
+        navigate(`/repo/tree/${repoName}/${selectedBranch}/blob/${fullPath}`, {relative: "path"})
         return null;
     }
-
-    console.log(data)
 
     return (
         <div className="fixed py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md overflow-y-scroll">
@@ -94,18 +92,26 @@ function FileNav({ repoName, selectedBranch }) {
 
 
 function FileNavItem({ object, fetchNewPath }) {
+    const [isFolderOpen, setIsFolderOpen] = useState(false);
+    const handleClick = () => {
+        setIsFolderOpen(!isFolderOpen)
+        fetchNewPath(object.id, object.type, object.fullPath);
+    }
+
     return (
-        <div className="ml-8">
+        <div className="ml-6">
             <section
-                className="flex -ml-8 my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
-                onClick={() => fetchNewPath(object.id, object.type, object.fullPath)}
+                className="flex -ml-6 my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
+                onClick={handleClick}
             >
                 <div className="flex gap-x-1 items-center">
                     <div className="h-5 w-5">
+                    { object.type == "tree" &&
                         <img
-                            className="h-full w-full object-center object-cover"
+                            className={`h-full w-full object-center object-cover ${isFolderOpen && "rotate-90"}`}
                             src="/icons/arrow-right.png"
                         />
+                    }
                     </div>
                     <div className="h-6 w-6">
                         <img
@@ -116,7 +122,7 @@ function FileNavItem({ object, fetchNewPath }) {
                 </div>
                 <p>{ object.path }</p>
             </section>
-            {object.objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+            {isFolderOpen && object.objects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
         </div>
     );
 }
