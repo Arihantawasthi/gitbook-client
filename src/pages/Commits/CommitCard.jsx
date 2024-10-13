@@ -14,7 +14,7 @@ function CommitCard({ commitObject }) {
     }
 
     return (
-        <>
+        <div className="commit-container">
             <div className="p-4 bg-surface-container rounded-t-2xl shadow-lg">
                 <div className="flex flex-col gap-y-4 md:flex-row md:justify-between">
                     <div>
@@ -34,7 +34,7 @@ function CommitCard({ commitObject }) {
             </div>
             <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: { commitObject.commit_timestamp }</p>
             <CommitSign />
-        </>
+        </div>
     );
 }
 
@@ -51,7 +51,7 @@ function CardStatInfo({ value, label, color="" }) {
 
 function CommitSign() {
     return (
-        <div className="ml-4 flex flex-col items-center w-4">
+        <div className="ml-4 flex flex-col items-center w-4 last-hidden">
             <div className="w-1 rounded-t-2xl h-6 bg-primary"></div>
             <div className="w-4 h-4 rounded-full bg-primary"></div>
             <div className="w-1 rounded-b-2xl h-6 bg-primary"></div>

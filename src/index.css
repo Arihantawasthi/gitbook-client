@@ -27,3 +27,7 @@ body {
     animation-name: open-filenav;
     animation-duration: 0.2s;
 }
+
+.commit-container:last-child .last-hidden {
+    display: none;
+}
