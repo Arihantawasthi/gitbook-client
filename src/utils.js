@@ -20,3 +20,30 @@ export const getDirPath = (path) => {
     const codePath = codePathSplit.join("/")
     return codePath;
 }
+
+export const createFileNavState = (objects) => {
+    const nestedFileObjects = [];
+    objects.forEach(obj => {
+        const nestedFileObject = {};
+        nestedFileObject.id = Math.random().toString(36).substring(2, 10);
+        nestedFileObject.type = obj.type;
+        nestedFileObject.path = obj.path;
+        nestedFileObject.fullPath = obj.fullPath;
+        nestedFileObject.size = obj.size;
+        nestedFileObject.objects = [];;
+        nestedFileObjects.push(nestedFileObject);
+    })
+
+    return nestedFileObjects;
+}
+
+export const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
+    for (let i = 0; i < objects.length; i++) {
+        if (objects[i].id == objectId) {
+            objects[i].objects = newObjects;
+            return objects;
+        }
+        addNewObjectsInFileNav(objectId, newObjects, objects[i].objects)
+    }
+    return objects;
+}
