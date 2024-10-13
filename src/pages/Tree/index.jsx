@@ -43,10 +43,6 @@ function Tree() {
                     <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
                     <div className="h-screen overflow-y-scroll">
                         { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
-                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
-                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
-                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
-                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
                     </div>
                 </div>
                 {isExplorerActive &&

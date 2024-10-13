@@ -5,6 +5,15 @@ import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileEx
 
 
 function Repo({ data, path, error, branch, onClick, updateRepo}) {
+    const treeObjects = [];
+    const blobObjects = [];
+    data.objects.forEach(object => {
+        if (object.type == "tree") {
+            treeObjects.push(object);
+            return
+        }
+        blobObjects.push(object);
+    });
     return (
         <Layout>
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
@@ -15,7 +24,8 @@ function Repo({ data, path, error, branch, onClick, updateRepo}) {
             </div>
             <div className="mt-4 border border-outline rounded-xl">
                 <FileExplorerHeader repo={data.name} branch={branch} path={path} />
-                {data.objects.map((object, idx) => <FileExplorerObjects key={idx} object={object} updateRepo={updateRepo} />) }
+                {treeObjects.map((object, idx) => <FileExplorerObjects key={idx} object={object} updateRepo={updateRepo} />) }
+                {blobObjects.map((object, idx) => <FileExplorerObjects key={idx} object={object} updateRepo={updateRepo} />) }
             </div>
         </Layout>
     );

@@ -23,6 +23,17 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
         return null;
     }
 
+    const treeObjects = [];
+    const blobObjects = [];
+
+    data.forEach(object => {
+        if (object.type === "tree") {
+            treeObjects.push(object);
+            return;
+        }
+        blobObjects.push(object);
+    })
+
     return (
         <div
             className="filenav-open-anim fixed py-6 px-4 bottom-0 left-0
@@ -31,7 +42,8 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
                         md:rounded-t-[0px] md:rounded-tr-3xl md:rounded-br-3xl"
         >
             <div className="w-full h-[90%] overflow-scroll">
-                {data.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+                {treeObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
+                {blobObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
             </div>
             <button
                 className="w-full mt-4 py-3 rounded-xl bg-primary outline-0 border-0"

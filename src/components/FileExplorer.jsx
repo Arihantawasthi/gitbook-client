@@ -37,7 +37,7 @@ function FileExplorerObjects({ object, updateRepo }) {
                         src={object.type == "tree" ? `/icons/dir-filled.png` : `/icons/file-filled.png`}
                     />
                 </div>
-                <p className="underline">{ object.path }</p>
+                <p className={`${object.type == "tree" ? "" : "underline"}`}>{ object.path }</p>
             </div>
             <p>{ object.size == "-" ? "" : `${object.size} B` } </p>
         </div>
