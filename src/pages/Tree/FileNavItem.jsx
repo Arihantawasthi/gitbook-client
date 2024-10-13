@@ -11,7 +11,7 @@ function FileNavItem({ object, fetchNewPath }) {
     return (
         <div className="ml-6">
             <section
-                className="flex -ml-6 my-1 gap-x-4 py-3 px-2 hover:bg-outline rounded-xl"
+                className="flex -ml-6 my-1 gap-x-4 py-3 px-2 cursor-pointer hover:bg-outline rounded-xl"
                 onClick={handleClick}
             >
                 <div className="flex gap-x-1 items-center">

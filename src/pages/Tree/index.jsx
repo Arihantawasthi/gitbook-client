@@ -38,17 +38,25 @@ function Tree() {
                 </div>
                 <SelectMenu selectedValue={branch} />
             </div>
-            <div className="mt-2">
-                <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
-                { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+            <div className="md:flex md:flex-row-reverse md:gap-x-2">
+                <div className="mt-2 w-full">
+                    <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
+                    <div className="h-screen overflow-y-scroll">
+                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                    </div>
+                </div>
+                {isExplorerActive &&
+                    <FileNav
+                        repoName={data.name}
+                        selectedBranch={branch}
+                        toggleNav={setIsExplorerActive}
+                    />
+                }
             </div>
-            {isExplorerActive &&
-                <FileNav
-                    repoName={data.name}
-                    selectedBranch={branch}
-                    toggleNav={setIsExplorerActive}
-                />
-            }
         </Layout>
     );
 }

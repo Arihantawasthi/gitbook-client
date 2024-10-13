@@ -24,8 +24,13 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
     }
 
     return (
-        <div className="filenav-open-anim fixed py-6 px-4 bottom-0 left-0 w-full h-2/3 bg-surface-container z-10 rounded-t-3xl shadow-md">
-            <div className="w-full h-[90%] overflow-y-scroll">
+        <div
+            className="filenav-open-anim fixed py-6 px-4 bottom-0 left-0
+                        w-full h-2/3 bg-surface-container z-10 rounded-t-3xl
+                        shadow-md md:relative md:max-w-80 md:mt-2
+                        md:rounded-t-[0px] md:rounded-tr-3xl md:rounded-br-3xl"
+        >
+            <div className="w-full h-[90%] overflow-scroll">
                 {data.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
             </div>
             <button
