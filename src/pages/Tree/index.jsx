@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 import { FileExplorerHeader } from "../../components/FileExplorer";
-import { SelectMenu } from "../../components/SelectMenu";
+import { SelectMenu, Option } from "../../components/SelectMenu";
 import FileNav from "./FileNav";
 import RepoDesc from "../../components/RepoDesc";
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
@@ -13,14 +13,21 @@ import LoadingScreen from "../../components/LoadingScreen";
 
 function Tree() {
     const [isExplorerActive, setIsExplorerActive] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation().pathname;
     const { repoName } = useParams("repoName");
-    const { branch }= useParams("branch");
+    const { branch } = useParams("branch");
     const path = getDirPath(location);
+    const [selectedBranch, setSelectedBranch] = useState(branch);
     const { data, loading, error } = useFetchRepoObjects(repoName, branch, "blob", path);
 
     if (loading) {
         return <LoadingScreen />
+    }
+
+    const handleBranchChange = (branch) => {
+        setSelectedBranch(branch);
+        navigate(`/repo/tree/${repoName}/${branch}/blob/${path}`);
     }
 
     return (
@@ -36,12 +43,14 @@ function Tree() {
                         src="/icons/menu-filled.png"
                     />
                 </div>
-                <SelectMenu selectedValue={branch} />
+                <SelectMenu selectedValue={selectedBranch}>
+                    {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={handleBranchChange} />)}
+                </SelectMenu>
             </div>
             <div className="md:flex md:flex-row-reverse md:gap-x-2">
                 <div className="mt-2 w-full">
                     <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
-                    <div className="h-screen overflow-y-scroll">
+                    <div className="h-screen scrollbar-hidden overflow-y-scroll">
                         { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
                     </div>
                 </div>
