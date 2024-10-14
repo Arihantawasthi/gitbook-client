@@ -31,3 +31,7 @@ body {
 .commit-container:last-child .last-hidden {
     display: none;
 }
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}

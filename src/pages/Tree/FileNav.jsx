@@ -41,7 +41,7 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
                         shadow-md md:relative md:max-w-80 md:mt-2
                         md:rounded-t-[0px] md:rounded-tr-3xl md:rounded-br-3xl"
         >
-            <div className="w-full h-[90%] overflow-scroll">
+            <div className="w-full h-[90%] scrollbar-hidden overflow-y-scroll">
                 {treeObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
                 {blobObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
             </div>

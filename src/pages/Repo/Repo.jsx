@@ -19,7 +19,7 @@ function Repo({ data, path, error, branch, onClick, updateRepo}) {
             {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
             <div className="flex justify-end">
                 <SelectMenu selectedValue={branch}>
-                    {data.branches.map((item, idx) => <Option key={idx} item={item} onClick={onClick} />)}
+                    {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={onClick} />)}
                 </SelectMenu>
             </div>
             <div className="mt-4 border border-outline rounded-xl">

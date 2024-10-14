@@ -27,7 +27,7 @@ function FileExplorerHeader({ repo, branch, path }) {
 function FileExplorerObjects({ object, updateRepo }) {
     return (
         <div
-            className="p-4 flex justify-between items-center border-b border-outline last:border-none last:rounded-b-xl font-display text-on-secondary"
+            className="p-4 flex justify-between items-center border-b border-outline last:border-none last:rounded-b-xl font-display text-on-secondary cursor-pointer"
             onClick={() => updateRepo(object.type, object.fullPath)}
         >
             <div className="flex gap-x-2 items-center">
