@@ -38,10 +38,10 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
         <div
             className="filenav-open-anim fixed py-6 px-4 bottom-0 left-0
                         w-full h-2/3 bg-surface-container z-10 rounded-t-3xl
-                        shadow-md md:relative md:max-w-80 md:mt-2
-                        md:rounded-t-[0px] md:rounded-tr-3xl md:rounded-br-3xl"
+                        shadow-md lg:relative lg:!min-w-[260px] lg:!max-w-[260px] lg:mt-2
+                        lg:rounded-t-[0px] lg:rounded-tr-3xl lg:rounded-br-3xl"
         >
-            <div className="w-full h-[90%] scrollbar-hidden overflow-y-scroll">
+            <div className="w-full h-[90%] lg:h-[520px] grow-1 scrollbar-hidden overflow-y-scroll">
                 {treeObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
                 {blobObjects.map((object, idx) => <FileNavItem key={idx} object={object} fetchNewPath={fetchNewPath} />)}
             </div>

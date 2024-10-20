@@ -49,13 +49,7 @@ function Tree() {
                         {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={handleBranchChange} />)}
                     </SelectMenu>
                 </div>
-                <div className="md:flex md:flex-row-reverse md:gap-x-2">
-                    <div className="mt-2 w-full">
-                        <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
-                        <div className="h-screen scrollbar-hidden overflow-y-scroll">
-                            { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
-                        </div>
-                    </div>
+                <div className="lg:flex lg:flex-row lg:gap-x-2">
                     {isExplorerActive &&
                         <FileNav
                             repoName={data.name}
@@ -63,6 +57,12 @@ function Tree() {
                             toggleNav={setIsExplorerActive}
                         />
                     }
+                    <div className="mt-2 min-w-[1px]">
+                        <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
+                        <div className="h-screen scrollbar-hidden overflow-y-scroll">
+                            { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
