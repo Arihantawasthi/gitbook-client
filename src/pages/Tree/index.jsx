@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import Layout from "../../components/Layout";
+import Header from "../../components/Header";
 import { FileExplorerHeader } from "../../components/FileExplorer";
 import { SelectMenu, Option } from "../../components/SelectMenu";
 import FileNav from "./FileNav";
@@ -31,38 +31,41 @@ function Tree() {
     }
 
     return (
-        <Layout>
-            <RepoDesc repoName={data.name} repoDesc={data.desc} />
-            <div className="mt-6 flex justify-between items-center">
-                <div
-                    className="h-8 w-8 cursor-pointer"
-                    onClick={() => setIsExplorerActive(!isExplorerActive)}
-                >
-                    <img
-                        className="h-full w-full object-center object-cover"
-                        src="/icons/menu-filled.png"
-                    />
-                </div>
-                <SelectMenu selectedValue={selectedBranch}>
-                    {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={handleBranchChange} />)}
-                </SelectMenu>
-            </div>
-            <div className="md:flex md:flex-row-reverse md:gap-x-2">
-                <div className="mt-2 w-full">
-                    <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
-                    <div className="h-screen scrollbar-hidden overflow-y-scroll">
-                        { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+        <>
+            <Header />
+            <div className="px-4 my-10">
+                <RepoDesc repoName={data.name} repoDesc={data.desc} />
+                <div className="mt-6 flex justify-between items-center">
+                    <div
+                        className="h-8 w-8 cursor-pointer"
+                        onClick={() => setIsExplorerActive(!isExplorerActive)}
+                    >
+                        <img
+                            className="h-full w-full object-center object-cover"
+                            src="/icons/menu-filled.png"
+                        />
                     </div>
+                    <SelectMenu selectedValue={selectedBranch}>
+                        {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={handleBranchChange} />)}
+                    </SelectMenu>
                 </div>
-                {isExplorerActive &&
-                    <FileNav
-                        repoName={data.name}
-                        selectedBranch={branch}
-                        toggleNav={setIsExplorerActive}
-                    />
-                }
+                <div className="md:flex md:flex-row-reverse md:gap-x-2">
+                    <div className="mt-2 w-full">
+                        <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
+                        <div className="h-screen scrollbar-hidden overflow-y-scroll">
+                            { data?.blob.map((item, idx) => <CodeLine key={idx} lineNumber={idx+1} lineContent={item} />) }
+                        </div>
+                    </div>
+                    {isExplorerActive &&
+                        <FileNav
+                            repoName={data.name}
+                            selectedBranch={branch}
+                            toggleNav={setIsExplorerActive}
+                        />
+                    }
+                </div>
             </div>
-        </Layout>
+        </>
     );
 }
 
@@ -71,7 +74,7 @@ function CodeLine({ lineNumber, lineContent }) {
     return (
         <div className="flex font-display">
             <p className="px-2 bg-surface-container">{ lineNumber }</p>
-            <p className="pl-2 bg-[#000] w-full">{ lineContent }</p>
+            <p className="pl-2 bg-[#000] w-full text-wrap">{ lineContent }</p>
         </div>
     );
 }

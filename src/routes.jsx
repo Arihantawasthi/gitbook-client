@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import RepoContainer from "./pages/Repo";
 import Tree from "./pages/Tree";
 import Commits from "./pages/Commits";
+import Diff from "./pages/Diff";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     {
         path: "repo/commits/:repoName/:branch",
         element: <Commits />
+    },
+    {
+        path: "/commit/:repoName/:commitHash",
+        element: <Diff />
     }
 ]);
 
