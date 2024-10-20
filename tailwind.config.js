@@ -21,6 +21,7 @@ export default {
                 "on-surface": "#e9dff0",
                 "on-surface-nv": "#cec2d9",
                 "muted": "#978da2",
+                code: "#111",
             },
             fontFamily: {
                 "default": ['Jost', "sans-serif"],

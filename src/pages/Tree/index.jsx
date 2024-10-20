@@ -74,7 +74,7 @@ function CodeLine({ lineNumber, lineContent }) {
     return (
         <div className="flex font-display">
             <p className="px-2 bg-surface-container">{ lineNumber }</p>
-            <p className="pl-2 bg-[#000] w-full text-wrap">{ lineContent }</p>
+            <p className="pl-2 bg-code w-full text-wrap">{ lineContent }</p>
         </div>
     );
 }

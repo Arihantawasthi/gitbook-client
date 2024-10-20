@@ -15,6 +15,9 @@ function Diff() {
     if (loading) {
         return <LoadingScreen />
     }
+    if (error) {
+        return <div>Oops! An Error occured</div>
+    }
 
     return (
         <Layout>

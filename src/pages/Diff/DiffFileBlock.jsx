@@ -1,7 +1,7 @@
 function DiffFileBlock({ object }) {
     return (
-        <div className="bg-black rounded-lg">
-            <div className="p-4 rounded-t-lg bg-surface-container">
+        <div className="bg-code rounded-2xl">
+            <div className="p-4 rounded-t-2xl bg-surface-container">
                 <div className="underline">{ object.filePath }</div>
             </div>
             <div className="p-4">
