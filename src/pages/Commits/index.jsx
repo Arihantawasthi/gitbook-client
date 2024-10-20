@@ -23,7 +23,7 @@ function Commits() {
                     <RepoDesc repoName={data.repoName} repoDesc={data.repoDesc} />
                     <h1 className="mt-6 text-xl font-bold">Commits</h1>
                     <div className="mt-4 flex flex-col">
-                        {data.logs.map((item, idx) => <CommitCard key={idx} commitObject={item} />)}
+                        {data.logs.map((item, idx) => <CommitCard key={idx} repoName={repoName} commitObject={item} />)}
                     </div>
                 </>
             )}

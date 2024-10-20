@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import { calculatedDeletionBoxes } from "../../utils";
 
 
-function CommitCard({ commitObject }) {
+function CommitCard({ repoName, commitObject }) {
     const deletionBoxes = calculatedDeletionBoxes(commitObject.insertions, commitObject.deletions);
     const insertionBoxes = 6 - deletionBoxes;
 
@@ -14,7 +15,7 @@ function CommitCard({ commitObject }) {
     }
 
     return (
-        <div className="commit-container">
+        <Link className="commit-container cursor-pointer" to={`/commit/${repoName}/${commitObject.commit_hash}`}>
             <div className="p-4 bg-surface-container rounded-t-2xl shadow-lg">
                 <div className="flex flex-col gap-y-4 md:flex-row md:justify-between">
                     <div>
@@ -34,7 +35,7 @@ function CommitCard({ commitObject }) {
             </div>
             <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: { commitObject.commit_timestamp }</p>
             <CommitSign />
-        </div>
+        </Link>
     );
 }
 
