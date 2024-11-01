@@ -5,7 +5,7 @@ function FileNavItem({ object, fetchNewPath }) {
     const [isFolderOpen, setIsFolderOpen] = useState(false);
     const handleClick = () => {
         setIsFolderOpen(!isFolderOpen)
-        fetchNewPath(object.id, object.type, object.fullPath);
+        fetchNewPath(object.id, object.type, object.full_path);
     }
 
     return (

@@ -28,7 +28,7 @@ export const createFileNavState = (objects) => {
         nestedFileObject.id = Math.random().toString(36).substring(2, 10);
         nestedFileObject.type = obj.type;
         nestedFileObject.path = obj.path;
-        nestedFileObject.fullPath = obj.fullPath;
+        nestedFileObject.full_path = obj.full_path;
         nestedFileObject.size = obj.size;
         nestedFileObject.objects = [];;
         nestedFileObjects.push(nestedFileObject);

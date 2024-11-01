@@ -2,7 +2,7 @@ function DiffFileBlock({ object }) {
     return (
         <div className="bg-code rounded-2xl">
             <div className="p-4 rounded-t-2xl bg-surface-container">
-                <div className="underline">{ object.filePath }</div>
+                <div className="underline">{ object.file_path }</div>
             </div>
             <div className="p-4">
                 { object.code_lines.map((line, idx) => <DiffLine key={idx} line={ line } />) }
