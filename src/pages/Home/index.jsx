@@ -11,7 +11,7 @@ function Home() {
         <Layout>
             <h1 className="text-3xl font-bold">Repositories</h1>
             <RepoCardContainer />
-            <h1 className="mt-6 text-3xl font-bold">Stats</h1>
+            <h1 className="mt-12 text-3xl font-bold">Stats</h1>
             <Stats />
         </Layout>
     );
@@ -40,11 +40,59 @@ function Stats() {
     }
 
     return (
-        <div>
-            <p>{stats.num_of_files}</p>
-            <p>{stats.num_of_lines}</p>
-            <p>{stats.num_of_commits}</p>
-            <p>{stats.num_of_repos}</p>
+        <div className="mt-6 grid grid-cols-2 grid-rows-2 gap-4 md:gap-x-16">
+            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
+                <div>
+                    <p>Total Files</p>
+                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_files.toLocaleString(undefined)}</p>
+                </div>
+                <div className="h-12 w-12 flex items-center justify-center bg-tertiary rounded-md">
+                    <img
+                        className="h-7 w-7"
+                        src="public/icons/dir-filled-white.png"
+                        alt="num of files"
+                    />
+                </div>
+            </div>
+            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
+                <div>
+                    <p>Total Lines</p>
+                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_lines.toLocaleString(undefined)}</p>
+                </div>
+                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
+                    <img
+                        className="h-7 w-7"
+                        src="public/icons/file-filled-white.png"
+                        alt="num of lines"
+                    />
+                </div>
+            </div>
+            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
+                <div>
+                    <p>Total Commits</p>
+                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_commits.toLocaleString(undefined)}</p>
+                </div>
+                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
+                    <img
+                        className="h-7 w-7"
+                        src="public/icons/commit-filled.png"
+                        alt="num of commits"
+                    />
+                </div>
+            </div>
+            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
+                <div>
+                    <p>Total Repositories</p>
+                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_repos.toLocaleString(undefined)}</p>
+                </div>
+                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
+                    <img
+                        className="h-7 w-7"
+                        src="public/icons/repo-icon-fill.png"
+                        alt="num of repos"
+                    />
+                </div>
+            </div>
         </div>
     )
 }
