@@ -40,7 +40,7 @@ function Stats() {
     }
 
     return (
-        <div className="mt-6 grid grid-cols-2 grid-rows-2 gap-4 md:gap-x-16">
+        <div className="mt-6 md:grid md:grid-cols-2 md:grid-rows-2 space-y-4 md:space-y-0 md:gap-x-16 md:gap-y-4">
             <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
                 <div>
                     <p>Total Files</p>
