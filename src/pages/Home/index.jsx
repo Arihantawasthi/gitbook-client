@@ -1,10 +1,7 @@
 import Layout from "../../components/Layout";
-import RepositoryCard from "./RepositoryCard";
 
-import useFetchRepositories from "../../hooks/useFetchRepositories";
-import useFetchStats from "../../hooks/useFetchStats";
-import LoadingIcon from "../../components/LoadingIcon";
-
+import RepoCardContainer from "./RepoCardContainer";
+import Stats from "./Stats";
 
 function Home() {
     return (
@@ -15,86 +12,6 @@ function Home() {
             <Stats />
         </Layout>
     );
-}
-
-const RepoCardContainer = () => {
-    const { repos, loading, error } = useFetchRepositories();
-    if (loading) {
-        return <LoadingIcon />
-    }
-
-    return (
-        <div className="flex flex-col flex-wrap md:flex-row md:gap-x-6">
-            { error ? `Error: ${error}` : repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
-        </div>
-    );
-}
-
-function Stats() {
-    const { stats, loading, error } = useFetchStats();
-    if (loading) {
-        return <LoadingIcon />
-    }
-    if (error) {
-        return `Error: ${error}`
-    }
-
-    return (
-        <div className="mt-6 md:grid md:grid-cols-2 md:grid-rows-2 space-y-4 md:space-y-0 md:gap-x-16 md:gap-y-4">
-            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
-                <div>
-                    <p>Total Files</p>
-                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_files.toLocaleString(undefined)}</p>
-                </div>
-                <div className="h-12 w-12 flex items-center justify-center bg-tertiary rounded-md">
-                    <img
-                        className="h-7 w-7"
-                        src="public/icons/dir-filled-white.png"
-                        alt="num of files"
-                    />
-                </div>
-            </div>
-            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
-                <div>
-                    <p>Total Lines</p>
-                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_lines.toLocaleString(undefined)}</p>
-                </div>
-                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
-                    <img
-                        className="h-7 w-7"
-                        src="public/icons/file-filled-white.png"
-                        alt="num of lines"
-                    />
-                </div>
-            </div>
-            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
-                <div>
-                    <p>Total Commits</p>
-                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_commits.toLocaleString(undefined)}</p>
-                </div>
-                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
-                    <img
-                        className="h-7 w-7"
-                        src="public/icons/commit-filled.png"
-                        alt="num of commits"
-                    />
-                </div>
-            </div>
-            <div className="bg-surface-container flex justify-between items-center p-4 rounded-2xl">
-                <div>
-                    <p>Total Repositories</p>
-                    <p className="mt-1 text-2xl font-semibold">{stats.num_of_repos.toLocaleString(undefined)}</p>
-                </div>
-                <div className="h-12 w-12 bg-tertiary flex justify-center items-center rounded-md">
-                    <img
-                        className="h-7 w-7"
-                        src="public/icons/repo-icon-fill.png"
-                        alt="num of repos"
-                    />
-                </div>
-            </div>
-        </div>
-    )
 }
 
 export default Home;
