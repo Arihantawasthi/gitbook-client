@@ -14,6 +14,16 @@ function Stats() {
     return (
         <div className="mt-6 md:grid md:grid-cols-2 md:grid-rows-2 space-y-4 md:space-y-0 md:gap-x-16 md:gap-y-4">
             <StatCard
+                label="Repositories"
+                stat={stats.num_of_repos.toLocaleString(undefined)}
+                icon="public/icons/repo-icon-fill.png"
+            />
+            <StatCard
+                label="Commits"
+                stat={stats.num_of_commits.toLocaleString(undefined)}
+                icon="public/icons/commit-filled.png"
+            />
+            <StatCard
                 label="Files"
                 stat={stats.num_of_files.toLocaleString(undefined)}
                 icon="public/icons/dir-filled-white.png"
@@ -22,16 +32,6 @@ function Stats() {
                 label="Lines"
                 stat={stats.num_of_lines.toLocaleString(undefined)}
                 icon="public/icons/file-filled-white.png"
-            />
-            <StatCard
-                label="Commits"
-                stat={stats.num_of_commits.toLocaleString(undefined)}
-                icon="public/icons/commit-filled.png"
-            />
-            <StatCard
-                label="Repositories"
-                stat={stats.num_of_repos.toLocaleString(undefined)}
-                icon="public/icons/repo-icon-filled.png"
             />
         </div>
     )

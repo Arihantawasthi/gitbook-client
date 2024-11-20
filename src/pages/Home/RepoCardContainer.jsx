@@ -1,12 +1,12 @@
-import LoadingIcon from "../../components/LoadingIcon";
+import LoadingRepoCardContainer from "./LoadingRepoCard";
+import RepositoryCard from "./RepositoryCard";
 
 import useFetchRepositories from "../../hooks/useFetchRepositories";
-import RepositoryCard from "./RepositoryCard";
 
 const RepoCardContainer = () => {
     const { repos, loading, error } = useFetchRepositories();
     if (loading) {
-        return <LoadingIcon />
+        return <LoadingRepoCardContainer />
     }
 
     return (
