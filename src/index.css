@@ -35,3 +35,23 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
     display: none;
 }
+
+@keyframes shimming {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+.shimmer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 200%;
+    width: 30px;
+    background: #9ca3af30;
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: shimming 1.1s linear infinite;
+}

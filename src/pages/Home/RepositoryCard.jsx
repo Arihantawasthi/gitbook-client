@@ -14,7 +14,7 @@ function RepositoryCard({ repo }) {
                             />
                         </div>
                         <div>
-                            <p className="text-2xl font-bold">{ repo.name }</p>
+                            <p className="text-2xl font-bold max-w-44 text-nowrap overflow-ellipsis overflow-hidden">{ repo.name }</p>
                             <p className="text-sm">By { repo.author }</p>
                         </div>
                     </div>
