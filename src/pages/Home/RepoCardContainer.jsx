@@ -1,17 +1,22 @@
-import LoadingRepoCardContainer from "./LoadingRepoCard";
+import LoadingRepoCardContainer from "./LoadingRepoCardContainer";
 import RepositoryCard from "./RepositoryCard";
+import Error from "../../components/Error";
 
 import useFetchRepositories from "../../hooks/useFetchRepositories";
+
 
 const RepoCardContainer = () => {
     const { repos, loading, error } = useFetchRepositories();
     if (loading) {
         return <LoadingRepoCardContainer />
     }
+    if (error) {
+        return <Error />
+    }
 
     return (
         <div className="flex flex-col flex-wrap md:flex-row md:gap-x-6">
-            { error ? `Error: ${error}` : repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
+            { repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
         </div>
     );
 }

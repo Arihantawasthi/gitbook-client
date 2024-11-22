@@ -1,14 +1,16 @@
-import LoadingIcon from "../../components/LoadingIcon";
+import LoadingStatCardContainer from "./LoadingStatCardContainer";
+
+import Error from "../../components/Error";
 
 import useFetchStats from "../../hooks/useFetchStats";
 
 function Stats() {
     const { stats, loading, error } = useFetchStats();
     if (loading) {
-        return <LoadingIcon />
+        return <LoadingStatCardContainer />
     }
     if (error) {
-        return `Error: ${error}`
+        return <Error />
     }
 
     return (
@@ -34,7 +36,7 @@ function Stats() {
                 icon="public/icons/file-filled-white.png"
             />
         </div>
-    )
+    );
 }
 
 function StatCard({ label, stat, icon }) {
@@ -52,7 +54,8 @@ function StatCard({ label, stat, icon }) {
                 />
             </div>
         </div>
-    )
+    );
 }
+
 
 export default Stats;
