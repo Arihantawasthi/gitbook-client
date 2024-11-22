@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 import LoadingScreen from "../../components/LoadingScreen";
+import Error from "../../components/Error";
 import Repo from "./Repo";
 import { getDirPath } from "../../utils";
 
@@ -18,6 +19,13 @@ function RepoContainer() {
 
     if (loading) {
         return <LoadingScreen />;
+    }
+    if (error) {
+        return (
+            <div className="h-svh w-full flex justify-center items-center">
+                <Error />
+            </div>
+        )
     }
 
     const onClick = (branch) => {
@@ -39,7 +47,6 @@ function RepoContainer() {
         <Repo
             data={data}
             path={path}
-            error={error}
             branch={selectedValue}
             onClick={onClick}
             updateRepo={updateRepo}

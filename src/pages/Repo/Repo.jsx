@@ -4,7 +4,7 @@ import { SelectMenu, Option } from "../../components/SelectMenu";
 import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileExplorer";
 
 
-function Repo({ data, path, error, branch, onClick, updateRepo}) {
+function Repo({ data, path, branch, onClick, updateRepo }) {
     const treeObjects = [];
     const blobObjects = [];
     data.objects.forEach(object => {
@@ -16,7 +16,7 @@ function Repo({ data, path, error, branch, onClick, updateRepo}) {
     });
     return (
         <Layout>
-            {error ? `Error: ${error}` : <HeroSection name={data.name} desc={data.desc} />}
+            <HeroSection name={data.name} desc={data.desc} />
             <div className="flex justify-end">
                 <SelectMenu selectedValue={branch}>
                     {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={onClick} />)}
