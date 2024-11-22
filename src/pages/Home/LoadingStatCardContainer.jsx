@@ -14,7 +14,7 @@ function LoadingStatCard() {
         <div className="relative overflow-hidden bg-surface-container flex justify-between items-center p-4 rounded-2xl">
             <div>
                 <div className="h-4 w-16 bg-gray-400 rounded-sm"></div>
-                <div className="mt-1 h-6 w-16 bg-gray-400 rounded-sm"></div>
+                <div className="mt-1 h-8 w-16 bg-gray-400 rounded-sm"></div>
             </div>
             <div className="h-12 w-12 bg-gray-400 rounded-md"></div>
             <div className="shimmer"></div>

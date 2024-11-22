@@ -11,6 +11,7 @@ function RepositoryCard({ repo }) {
                             <img
                                 className="h-full w-full object-center object-cover"
                                 src="/public/icons/repo-icon-fill.png"
+                                alt="repo-icon"
                             />
                         </div>
                         <div>
@@ -23,6 +24,7 @@ function RepositoryCard({ repo }) {
                             <img
                                 className="h-full w-full object-center object-cover"
                                 src="/public/icons/clock-outline.png"
+                                alt="created at"
                             />
                         </div>
                         <div className="w-full flex justify-between">
@@ -35,6 +37,7 @@ function RepositoryCard({ repo }) {
                             <img
                                 className="h-full w-full object-center object-cover"
                                 src="/public/icons/clock-outline.png"
+                                alt="committed at"
                             />
                         </div>
                         <div className="w-full flex justify-between">

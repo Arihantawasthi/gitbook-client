@@ -5,6 +5,7 @@ function Header() {
                 <img
                     className="h-full w-full object-center object-cover"
                     src="/public/gitbook-logos/gitbook-logo.png"
+                    alt="logo"
                 />
             </div>
             <p className="uppercase text-xl text-on-surface font-display font-bold tracking-wide">Gitbook</p>
