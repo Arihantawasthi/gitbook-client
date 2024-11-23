@@ -55,3 +55,19 @@ body {
     transform: translate(-50%, -50%) rotate(45deg);
     animation: shimming 1.1s linear infinite;
 }
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    90% {
+        transform: rotate(350deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
+    animation: rotation 1.1s infinite;
+}
