@@ -10,12 +10,13 @@ const useFetchRepoObjects = (repoName, branch, type, path) => {
     const fetchRepoObjects = async (repoName, branch, type, tailPath) => {
         try {
             const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
-            if (!response.ok) {
+            if (response.requestStatus != 1) {
                 throw new Error("Failed to fetch the repository objects");
             }
             const data = await response.json();
             setData(data.data);
         } catch (err) {
+            console.log(err.message);
             setError(err.message);
         } finally {
             setLoading(false);
