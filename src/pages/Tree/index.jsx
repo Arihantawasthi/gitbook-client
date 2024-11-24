@@ -28,7 +28,7 @@ function Tree() {
     if (error) {
         return (
             <div className="h-lvh w-full flex items-center justify-center">
-                <Error />
+                <Error message={error} />
             </div>
         );
     }
