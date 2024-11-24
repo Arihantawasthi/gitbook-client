@@ -6,12 +6,12 @@ import useFetchRepositories from "../../hooks/useFetchRepositories";
 
 
 const RepoCardContainer = () => {
-    const { repos, loading, error } = useFetchRepositories();
+    const { repos, loading, error } = useFetchRepositories(4);
     if (loading) {
         return <LoadingRepoCardContainer />
     }
     if (error) {
-        return <Error />
+        return <Error message={error} />
     }
 
     return (

@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 
 
-const useFetchRepositories = () => {
+const useFetchRepositories = (limit) => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchRepositories = async () => {
+    const fetchRepositories = async limit => {
         try {
-            const response = await fetch("http://localhost:8000/api/v1/repos");
-            if (!response.ok) {
-                throw new Error("Failed to fetch the repositories");
-            }
+            const response = await fetch(`http://localhost:8000/api/v1/repos?limit=${limit}`);
             const data = await response.json();
+            if (data.request_status != 1) {
+                throw new Error(data.message)
+            }
             setRepos(data.data);
         } catch (err) {
             setError(err.message)
@@ -22,8 +22,8 @@ const useFetchRepositories = () => {
     }
 
     useEffect(() => {
-        fetchRepositories();
-    }, []);
+        fetchRepositories(limit);
+    }, [limit]);
 
     return { repos, loading, error };
 }

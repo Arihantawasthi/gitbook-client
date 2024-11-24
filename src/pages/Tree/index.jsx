@@ -38,7 +38,6 @@ function Tree() {
         navigate(`/repo/tree/${repoName}/${branch}/blob/${path}`);
     }
 
-
     return (
         <>
             <Header />
