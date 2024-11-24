@@ -10,7 +10,7 @@ import useFetchRepoObjects from "../../hooks/useFetchRepoObjects";
 import { getDirPath } from "../../utils";
 import LoadingScreen from "../../components/LoadingScreen";
 import Error from "../../components/Error";
-
+import RenderView from "./RenderView";
 
 function Tree() {
     const [isExplorerActive, setIsExplorerActive] = useState(false);
@@ -38,10 +38,6 @@ function Tree() {
         navigate(`/repo/tree/${repoName}/${branch}/blob/${path}`);
     }
 
-    const getLineNumberWidth = totalLines => {
-        const digits = Math.max(3, totalLines.toString().length)
-        return `${digits}ch`
-    }
 
     return (
         <>
@@ -70,34 +66,15 @@ function Tree() {
                             toggleNav={setIsExplorerActive}
                         />
                     }
-                    <div className="mt-2 min-w-[1px]">
+                    <div className="mt-2 min-w-[1px] w-full">
                         <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
                         <div className="h-screen scrollbar-hidden overflow-y-scroll">
-                            {
-                                data?.blob.map((item, idx) =>
-                                    <CodeLine
-                                        key={idx}
-                                        lineNumber={idx+1}
-                                        lineContent={item}
-                                        lineNumberWidth={getLineNumberWidth(data.blob.length)}
-                                    />
-                                )
-                            }
+                            <RenderView path={path} blob={data.blob} />
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    );
-}
-
-
-function CodeLine({ lineNumber, lineContent, lineNumberWidth }) {
-    return (
-        <div className="flex font-display">
-            <p className={`bg-surface-container w-[${lineNumberWidth}] text-center select-none`}>{ lineNumber }</p>
-            <code className="text-sm pl-2 bg-code w-full text-wrap whitespace-break-spaces">{ lineContent }</code>
-        </div>
     );
 }
 

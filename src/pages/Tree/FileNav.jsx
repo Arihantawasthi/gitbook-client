@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import LoadingScreen from "../../components/LoadingScreen";
+import Error from "../../components/Error";
 import FileNavItem from "./FileNavItem";
 import useFetchFileNavObjects from "../../hooks/useFetchFileNavObjects";
 
@@ -11,6 +12,9 @@ function FileNav({ repoName, selectedBranch, toggleNav }) {
 
     if (loading) {
         return <LoadingScreen />
+    }
+    if (error) {
+        return <Error message={error} />
     }
 
     const fetchNewPath = async (objectId, type, fullPath) => {

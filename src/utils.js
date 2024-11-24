@@ -47,3 +47,8 @@ export const addNewObjectsInFileNav = (objectId, newObjects, objects) => {
     }
     return objects;
 }
+
+export const getLineNumberWidth = totalLines => {
+    const digits = Math.max(3, totalLines.toString().length)
+    return `${digits}ch`
+}
