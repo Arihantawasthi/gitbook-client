@@ -4,12 +4,17 @@ import RepoContainer from "./pages/Repo";
 import Tree from "./pages/Tree";
 import Commits from "./pages/Commits";
 import Diff from "./pages/Diff";
+import Repos from "./pages/Repos";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Home />
+    },
+    {
+        path: "/repos",
+        element: <Repos />
     },
     {
         path: "repo/metadata/:repoName/:branch/*",
