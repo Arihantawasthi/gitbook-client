@@ -5,8 +5,8 @@ import Error from "../../components/Error";
 import useFetchRepositories from "../../hooks/useFetchRepositories";
 
 
-const RepoCardContainer = () => {
-    const { repos, loading, error } = useFetchRepositories(4);
+const RepoCardContainer = ({ size }) => {
+    const { repos, loading, error } = useFetchRepositories(size);
     if (loading) {
         return <LoadingRepoCardContainer />
     }
