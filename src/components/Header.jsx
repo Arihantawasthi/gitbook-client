@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <div className="flex gap-x-2 items-center bg-surface-container px-4 py-3">
+        <div className="flex gap-x-2 items-center bg-surface-container px-4 py-3 cursor-pointer">
             <div className="h-8 w-8">
                 <img
                     className="h-full w-full object-center object-cover"
