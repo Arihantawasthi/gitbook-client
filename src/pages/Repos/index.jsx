@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import LoadingRepoCardContainer from "../Home/LoadingRepoCardContainer";
 import RepositoryCard from "../Home/RepositoryCard";
 
-import useFetchRepositories from "../../hooks/useFetchRepositories";
+import useObserver from "../../hooks/useObserver";
 
 
 function Repos() {
@@ -16,8 +16,9 @@ function Repos() {
 }
 
 const RepoList = ({ size }) => {
-    const { repos, loading, error } = useFetchRepositories(size);
-    if (loading) {
+    const { repos, loading, error, observerRef } = useObserver(size);
+
+    if (loading && repos.length === 0) {
         return <LoadingRepoCardContainer />
     }
     if (error) {
@@ -27,6 +28,9 @@ const RepoList = ({ size }) => {
     return (
         <div className="flex flex-col flex-wrap md:flex-row md:gap-x-6">
             { repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
+            <div ref={observerRef}>
+                { loading && <LoadingRepoCardContainer /> }
+            </div>
         </div>
     );
 }

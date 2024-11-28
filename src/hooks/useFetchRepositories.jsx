@@ -13,7 +13,7 @@ const useFetchRepositories = (limit) => {
             if (data.request_status != 1) {
                 throw new Error(data.message)
             }
-            setRepos(data.data);
+            setRepos(prevState => [...prevState, ...data.data]);
         } catch (err) {
             setError(err.message)
         } finally {
@@ -25,7 +25,7 @@ const useFetchRepositories = (limit) => {
         fetchRepositories(limit);
     }, [limit]);
 
-    return { repos, loading, error };
+    return { repos, fetchRepositories, loading, error };
 }
 
 
