@@ -2,6 +2,7 @@ import Error from "../../components/Error";
 import Layout from "../../components/Layout";
 import LoadingRepoCardContainer from "../Home/LoadingRepoCardContainer";
 import RepositoryCard from "../Home/RepositoryCard";
+import { REPOS_PER_PAGE } from "../../utils";
 
 import useObserver from "../../hooks/useObserver";
 
@@ -10,7 +11,7 @@ function Repos() {
     return (
         <Layout>
             <h1 className="text-3xl font-bold">Repositories</h1>
-            <RepoList size={10} />
+            <RepoList size={REPOS_PER_PAGE} />
         </Layout>
     );
 }
