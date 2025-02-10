@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchDiffRequest } from "../api/config";
 
 const useFetchDiff = (repoName, commitHash) => {
     const [data, setData] = useState({});
@@ -7,7 +8,8 @@ const useFetchDiff = (repoName, commitHash) => {
 
     const fetchDiff = async (repoName, commitHash) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/commit/${repoName}/${commitHash}`);
+            const url = fetchDiffRequest(repoName, commitHash);
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error("Failed to fetch the commit details");
             }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchRepoCommitsRequest } from "../api/config";
 
 
 const useFetchRepoCommits = (repoName, branch) => {
@@ -8,7 +9,9 @@ const useFetchRepoCommits = (repoName, branch) => {
 
     const fetchRepoCommits = async (repoName, branch) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/logs/${repoName}/${branch}`);
+            console.log(branch);
+            const url = fetchRepoCommitsRequest(repoName, branch);
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error("Failed to fetch the repository commits");
             }

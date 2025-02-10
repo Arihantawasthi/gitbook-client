@@ -66,7 +66,7 @@ function Tree() {
                         />
                     }
                     <div className="mt-2 min-w-[1px] w-full">
-                        <FileExplorerHeader repo={data.name} branch={data.desc} path={path} />
+                        <FileExplorerHeader repo={data.name} branch={selectedBranch} path={path} />
                         <div className="h-screen scrollbar-hidden overflow-y-scroll">
                             <RenderView path={path} blob={data.blob} />
                         </div>

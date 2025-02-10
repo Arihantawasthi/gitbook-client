@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createFileNavState, addNewObjectsInFileNav } from "../utils";
+import { fetchRepoObjectsRequest } from "../api/config";
 
 const useFetchFileNavObjects = (repoName, branch, type, path) => {
     const [data, setData] = useState([]);
@@ -9,7 +10,8 @@ const useFetchFileNavObjects = (repoName, branch, type, path) => {
 
     const fetchFileNavObjects = async (repoName, branch, type, tailPath, objectId='', prevObjects=[]) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
+            const url = fetchRepoObjectsRequest(repoName, type, branch, tailPath);
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error("Failed to fetch the repository objects")
             }

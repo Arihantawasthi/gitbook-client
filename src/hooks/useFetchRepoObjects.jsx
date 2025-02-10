@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchRepoObjectsRequest } from "../api/config";
 
 
 const useFetchRepoObjects = (repoName, branch, type, path) => {
@@ -9,7 +10,8 @@ const useFetchRepoObjects = (repoName, branch, type, path) => {
 
     const fetchRepoObjects = async (repoName, branch, type, tailPath) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repo/${repoName}/${type}/metadata/${branch}/${tailPath}`);
+            const url = fetchRepoObjectsRequest(repoName, type, branch, tailPath);
+            const response = await fetch(url);
             const data = await response.json();
             if (data.request_status != 1) {
                 throw new Error(data.message)

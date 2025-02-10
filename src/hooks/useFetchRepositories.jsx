@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchReposRequest } from "../api/config";
 
 
 const useFetchRepositories = (limit) => {
@@ -8,7 +9,8 @@ const useFetchRepositories = (limit) => {
 
     const fetchRepositories = async limit => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repos?limit=${limit}`);
+            const url = fetchReposRequest(limit);
+            const response = await fetch(url);
             const data = await response.json();
             if (data.request_status != 1) {
                 throw new Error(data.message)

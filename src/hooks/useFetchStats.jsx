@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FETCH_STATS } from "../api/config";
 
 
 const useFetchStats = () => {
@@ -8,7 +9,7 @@ const useFetchStats = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/v1/stats");
+            const response = await fetch(FETCH_STATS);
             if (!response.ok) {
                 throw new Error("Failed to fetch the stats");
             }
