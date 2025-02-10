@@ -71,3 +71,13 @@ body {
 .loader {
     animation: rotation 1.1s infinite;
 }
+
+.keyword { color: #bb9af7; font-weight: bold; }  /* Light Purple */
+.string { color: #9ece6a; }  /* Soft Green */
+.comment { color: #565f89; font-style: italic; }  /* Dim Gray-Blue */
+.tag { color: #f7768e; }  /* Bright Pink */
+.attribute { color: #7aa2f7; }  /* Blue */
+.selector { color: #9ece6a; }  /* Soft Green */
+.property { color: #bb9af7; }  /* Light Purple */
+.value { color: #ff9e64; }  /* Orange */
+.number { color: #ff9e64; }  /* Orange */
