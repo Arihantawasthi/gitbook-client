@@ -10,7 +10,7 @@ function Stats() {
         return <LoadingStatCardContainer />
     }
     if (error) {
-        return <Error />
+        return <Error message={error} />
     }
 
     return (
