@@ -9,7 +9,6 @@ const useFetchRepoCommits = (repoName, branch) => {
 
     const fetchRepoCommits = async (repoName, branch) => {
         try {
-            console.log(branch);
             const url = fetchRepoCommitsRequest(repoName, branch);
             const response = await fetch(url);
             if (!response.ok) {

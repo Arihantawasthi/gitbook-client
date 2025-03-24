@@ -17,7 +17,6 @@ const useFetchFileNavObjects = (repoName, branch, type, path) => {
             }
             const data = await response.json();
             let objects = createFileNavState(data.data.objects)
-            console.log(objects);
             if (objectId === '' || prevObjects.length == 0) {
                 setData(objects)
                 return

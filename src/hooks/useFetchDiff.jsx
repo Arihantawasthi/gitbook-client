@@ -14,7 +14,6 @@ const useFetchDiff = (repoName, commitHash) => {
                 throw new Error("Failed to fetch the commit details");
             }
             const data = await response.json();
-            console.log(data);
             setData(data.data);
         } catch (err) {
             setError(err.message);
