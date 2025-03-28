@@ -18,22 +18,22 @@ function Stats() {
             <StatCard
                 label="Repositories"
                 stat={stats.num_of_repos.toLocaleString(undefined)}
-                icon="public/icons/repo-icon-fill.png"
+                icon="/icons/repo-icon-fill.png"
             />
             <StatCard
                 label="Commits"
                 stat={stats.num_of_commits.toLocaleString(undefined)}
-                icon="public/icons/commit-filled.png"
+                icon="/icons/commit-filled.png"
             />
             <StatCard
                 label="Files"
                 stat={stats.num_of_files.toLocaleString(undefined)}
-                icon="public/icons/dir-filled-white.png"
+                icon="/icons/dir-filled-white.png"
             />
             <StatCard
                 label="Lines"
                 stat={stats.num_of_lines.toLocaleString(undefined)}
-                icon="public/icons/file-filled-white.png"
+                icon="/icons/file-filled-white.png"
             />
         </div>
     );
