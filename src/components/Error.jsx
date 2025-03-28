@@ -5,7 +5,7 @@ function Error({ message }) {
                 <div className="h-16 w-16">
                     <img
                         className="w-full h-full object-center"
-                        src="/public/icons/error.png"
+                        src="/icons/error.png"
                     />
                 </div>
                 { message ?

@@ -4,7 +4,7 @@ function Header() {
             <div className="h-8 w-8">
                 <img
                     className="h-full w-full object-center object-cover"
-                    src="/public/gitbook-logos/gitbook-logo.png"
+                    src="/gitbook-logos/gitbook-logo.png"
                     alt="logo"
                 />
             </div>

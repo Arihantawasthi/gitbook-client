@@ -10,7 +10,7 @@ function RepositoryCard({ repo }) {
                         <div className="h-8 w-8">
                             <img
                                 className="h-full w-full object-center object-cover"
-                                src="/public/icons/repo-icon-fill.png"
+                                src="/icons/repo-icon-fill.png"
                                 alt="repo-icon"
                             />
                         </div>
@@ -23,7 +23,7 @@ function RepositoryCard({ repo }) {
                         <div className="h-4 w-4">
                             <img
                                 className="h-full w-full object-center object-cover"
-                                src="/public/icons/clock-outline.png"
+                                src="/icons/clock-outline.png"
                                 alt="created at"
                             />
                         </div>
@@ -36,7 +36,7 @@ function RepositoryCard({ repo }) {
                         <div className="h-4 w-4">
                             <img
                                 className="h-full w-full object-center object-cover"
-                                src="/public/icons/clock-outline.png"
+                                src="/icons/clock-outline.png"
                                 alt="committed at"
                             />
                         </div>

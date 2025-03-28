@@ -2,7 +2,7 @@ function HeroSection({ name, desc }) {
     return (
         <div className="flex gap-x-4">
             <div className="h-12 w-12">
-                <img className="h-full w-full object-center object-cover" src="/public/icons/repo-icon-fill.png" />
+                <img className="h-full w-full object-center object-cover" src="/icons/repo-icon-fill.png" />
             </div>
             <div>
                 <h1 className="text-3xl font-bold row-span-1">{name}</h1>
