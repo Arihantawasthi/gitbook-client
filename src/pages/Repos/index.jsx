@@ -27,7 +27,7 @@ const RepoList = ({ size }) => {
     }
 
     return (
-        <div className="flex flex-col flex-wrap md:flex-row md:gap-x-6">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] md:gap-x-6">
             { repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
             <div ref={observerRef}>
                 { loading && <LoadingRepoCardContainer /> }

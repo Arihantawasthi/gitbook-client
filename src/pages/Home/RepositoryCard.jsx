@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function RepositoryCard({ repo }) {
     return (
         <Link to={`repo/metadata/${repo.name}/${repo.default_branch}`}>
-            <div className="mt-6 w-full md:max-w-lg text-on-backround rounded-3xl bg-surface-container shadow-lg border-outline cursor-pointer">
+            <div className="mt-6 w-full text-on-backround rounded-3xl bg-surface-container shadow-lg border-outline cursor-pointer">
                 <div className="p-4 bg-tertiary text-on-tertiary rounded-t-3xl">
                     <div className="flex gap-x-2">
                         <div className="h-8 w-8">
@@ -46,7 +46,7 @@ function RepositoryCard({ repo }) {
                         </div>
                     </div>
                 </div>
-                <p className="px-4 py-2 text-sm text-on-surface-nv">{ repo.desc }</p>
+                <p className="px-4 py-2 text-sm text-on-surface-nv truncate">{ repo.desc }</p>
             </div>
         </Link>
     );
