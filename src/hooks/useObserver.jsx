@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { REPOS_PER_PAGE } from "../utils";
+import { fetchReposRequest } from "../api/config";
 
 
 function useObserver(limit) {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [pageLimit, setPageLimit] = useState(limit);
+    const [page, setPage] = useState(1);
 
     const observerRef = useRef();
 
-    const fetchRepos = async limit => {
+    const fetchRepos = async (limit, page) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/repos?limit=${limit}`)
+            const url = fetchReposRequest(limit, page);
+            const response = await fetch(url);
             const data = await response.json();
             if (data.request_status != 1) {
                 throw new  Error(data.message);
@@ -26,14 +28,14 @@ function useObserver(limit) {
     }
 
     useEffect(() => {
-        fetchRepos(pageLimit);
-    }, [pageLimit]);
+        fetchRepos(limit, page);
+    }, [limit, page]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
             const lastEntry = entries[0];
             if (lastEntry.isIntersecting && !loading && repos.length >= REPOS_PER_PAGE) {
-                setPageLimit(prevState => prevState + REPOS_PER_PAGE);
+                setPage(prevState => prevState + 1);
             }
         },
             { threshold: 1.0 }

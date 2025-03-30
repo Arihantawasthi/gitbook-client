@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { fetchReposRequest } from "../api/config";
 
 
-const useFetchRepositories = (limit) => {
+const useFetchRepositories = (limit, page) => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchRepositories = async limit => {
+    const fetchRepositories = async (limit, page) => {
         try {
-            const url = fetchReposRequest(limit);
+            const url = fetchReposRequest(limit, page);
             const response = await fetch(url);
             const data = await response.json();
             if (data.request_status != 1) {
@@ -24,8 +24,8 @@ const useFetchRepositories = (limit) => {
     }
 
     useEffect(() => {
-        fetchRepositories(limit);
-    }, [limit]);
+        fetchRepositories(limit, page);
+    }, [limit, page]);
 
     return { repos, fetchRepositories, loading, error };
 }

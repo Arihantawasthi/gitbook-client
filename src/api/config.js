@@ -6,8 +6,8 @@ export const FETCH_REPO_COMMITS = `${BASE_URL}/repo/logs`;
 export const FETCH_DIFF = `${BASE_URL}/repo/commit`;
 
 
-export const fetchReposRequest = query => {
-    return `${FETCH_REPOS}?limit=${query}`;
+export const fetchReposRequest = (limit, page=1) => {
+    return `${FETCH_REPOS}?limit=${limit}&page=${page}`;
 }
 
 export const fetchRepoObjectsRequest = (repoName, type, branch, tailPath) => {

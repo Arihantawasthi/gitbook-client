@@ -1,6 +1,6 @@
 const MAX_COMMIT_CARD_BOXES = 6;
 
-export const REPOS_PER_PAGE = 15;
+export const REPOS_PER_PAGE = 10;
 
 export const calculatedDeletionBoxes = (insertions, deletions) => {
     const iInsertions = parseInt(insertions);
