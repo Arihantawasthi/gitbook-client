@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { formatTimestamp } from "../../utils";
 
 
 function RepositoryCard({ repo }) {
@@ -29,7 +30,7 @@ function RepositoryCard({ repo }) {
                         </div>
                         <div className="w-full flex justify-between">
                             <p>Created at: </p>
-                            <p>{ repo.created_at }</p>
+                            <p>{ formatTimestamp(repo.created_at)}</p>
                         </div>
                     </div>
                     <div className="w-full flex gap-x-2 items-center">
@@ -42,7 +43,7 @@ function RepositoryCard({ repo }) {
                         </div>
                         <div className="w-full flex justify-between">
                             <p>Last Commit at: </p>
-                            <p>{ repo.last_commit_at }</p>
+                            <p>{ formatTimestamp(repo.last_commit_at) }</p>
                         </div>
                     </div>
                 </div>

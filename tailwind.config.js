@@ -13,7 +13,7 @@ export default {
                 "on-secondary": "#e0c9ff",
                 tertiary: "#a80088",
                 "on-tertiary": "#ffffff",
-                error: "#93000a",
+                error: "#EB5640",
                 "on-error": "#ffdad6",
                 surface: "#16111d",
                 "surface-container": "#221d29",
@@ -22,6 +22,7 @@ export default {
                 "on-surface-nv": "#cec2d9",
                 "muted": "#978da2",
                 code: "#111",
+                success: "#37B359",
             },
             fontFamily: {
                 "default": ['Jost', "sans-serif"],
