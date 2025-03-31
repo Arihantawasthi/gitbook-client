@@ -34,7 +34,7 @@ function useObserver(limit) {
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
             const lastEntry = entries[0];
-            if (lastEntry.isIntersecting && !loading && repos.length >= REPOS_PER_PAGE) {
+            if (lastEntry.isIntersecting && !loading && repos.length >= REPOS_PER_PAGE * page) {
                 setPage(prevState => prevState + 1);
             }
         },
