@@ -48,7 +48,7 @@ function useObserver(limit) {
         return () => {
             if (observerRef.current) observer.disconnect();
         }
-    }, [loading])
+    }, [repos, loading, page])
 
     return {repos, loading, error, observerRef };
 }
