@@ -15,7 +15,7 @@ const RepoCardContainer = ({ size }) => {
     }
 
     return (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] md:gap-x-6">
+        <div className="flex flex-col gap-y-6  md:grid md:grid-cols-[repeat(auto-fit,minmax(400px,1fr))] md:gap-6">
             { repos.map((repo, idx) => <RepositoryCard key={idx} repo={repo} />) }
         </div>
     );
