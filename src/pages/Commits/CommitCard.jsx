@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { calculatedDeletionBoxes } from "../../utils";
+import { formatTimestamp } from "../../utils";
 
 
 function CommitCard({ repoName, commitObject }) {
@@ -33,7 +34,7 @@ function CommitCard({ repoName, commitObject }) {
                     {renderBoxes(deletionBoxes, "bg-red-500")}
                 </div>
             </div>
-            <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: { commitObject.commit_timestamp }</p>
+            <p className="px-3 py-2 text-sm bg-outline rounded-b-2xl">Timestamp: { formatTimestamp(commitObject.commit_timestamp) }</p>
             <CommitSign />
         </Link>
     );
