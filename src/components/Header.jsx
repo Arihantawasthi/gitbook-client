@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
+
 function Header() {
     return (
-        <div className="flex gap-x-2 items-center bg-surface-container px-4 py-3 cursor-pointer">
+        <Link
+            to={"/"}
+            className="flex gap-x-2 items-center bg-surface-container px-4 py-3 cursor-pointer"
+        >
             <div className="h-8 w-8">
                 <img
                     className="h-full w-full object-center object-cover"
@@ -9,7 +14,7 @@ function Header() {
                 />
             </div>
             <p className="uppercase text-xl text-on-surface font-display font-bold tracking-wide">Gitbook</p>
-        </div>
+        </Link>
     );
 }
 
