@@ -1,7 +1,7 @@
 # Gitbook Client
 
 **The frontend interface for the Gitbook platform** - a minimal and efficient web UI to visualize repositories, view Git stats, navigate commit histories, and inspect file changes.
-This project consumes [`gitbook`](https://github.com/your-org/gitbook) backend and presents them in an intuitive, performant web experience.
+This project consumes [`gitbook`](https://github.com/Arihantawasthi/gitbook) backend and presents them in an intuitive, performant web experience.
 
 ---
 
@@ -26,7 +26,7 @@ Gitbook Client acts as the visual layer of the Gitbook platform. It connects to 
 ---
 
 ## 🚀 Getting Started
-Before running the client, make sure you have the [GitBook Backend](https://github.com/your-org/gitbook) running locally.
+Before running the client, make sure you have the [GitBook Backend](https://github.com/Arihantawasthi/gitbook) running locally.
 
 ### 1. Clone the repo
 ```git clone https://github.com/Arihantawasthi/gitbook-client.git && cd gitbook-client```
