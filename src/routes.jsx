@@ -5,7 +5,7 @@ import Tree from "./pages/Tree";
 import Commits from "./pages/Commits";
 import Diff from "./pages/Diff";
 import Repos from "./pages/Repos";
-
+import NotFound from "./pages/404";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: "/commit/:repoName/:commitHash",
         element: <Diff />
+    },
+    {
+        path: "*",
+        element: <NotFound />
     }
 ]);
 
