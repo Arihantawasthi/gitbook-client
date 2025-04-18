@@ -2,9 +2,18 @@ import Layout from "../../components/Layout";
 import HeroSection from "./HeroSection";
 import { SelectMenu, Option } from "../../components/SelectMenu";
 import { FileExplorerHeader, FileExplorerObjects } from "../../components/FileExplorer";
+import { useNavigate } from "react-router-dom";
 
 
 function Repo({ data, path, branch, onClick, updateRepo }) {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        if (window.history.length > 1) {
+            navigate(-1);
+        }
+    }
+
     const treeObjects = [];
     const blobObjects = [];
     data.objects.forEach(object => {
@@ -14,10 +23,20 @@ function Repo({ data, path, branch, onClick, updateRepo }) {
         }
         blobObjects.push(object);
     });
+
     return (
         <Layout>
             <HeroSection name={data.name} desc={data.desc} />
-            <div className="flex justify-end">
+            <div className="mt-6 flex justify-between items-center">
+                <div
+                    className="h-8 w-8 cursor-pointer"
+                    onClick={goBack}
+                >
+                    <img
+                        className="h-full w-full object-center object-cover"
+                        src="/icons/arrow-back.png"
+                    />
+                </div>
                 <SelectMenu selectedValue={branch}>
                     {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={onClick} />)}
                 </SelectMenu>

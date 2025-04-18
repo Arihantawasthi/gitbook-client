@@ -33,6 +33,12 @@ function Tree() {
         );
     }
 
+    const goBack = () => {
+        if (window.history.length > 1) {
+            navigate(-1);
+        }
+    }
+
     const handleBranchChange = (branch) => {
         setSelectedBranch(branch);
         navigate(`/repo/tree/${repoName}/${branch}/blob/${path}`);
@@ -44,14 +50,25 @@ function Tree() {
             <div className="px-4 my-10">
                 <RepoDesc repoName={data.name} repoDesc={data.desc} />
                 <div className="mt-6 flex justify-between items-center">
-                    <div
-                        className="h-8 w-8 cursor-pointer"
-                        onClick={() => setIsExplorerActive(!isExplorerActive)}
-                    >
-                        <img
-                            className="h-full w-full object-center object-cover"
-                            src="/icons/menu-filled.png"
-                        />
+                    <div className="flex gap-x-4">
+                        <div
+                            className="h-8 w-8 cursor-pointer"
+                            onClick={goBack}
+                        >
+                            <img
+                                className="h-full w-full object-center object-cover"
+                                src="/icons/arrow-back.png"
+                            />
+                        </div>
+                        <div
+                            className="h-8 w-8 cursor-pointer"
+                            onClick={() => setIsExplorerActive(!isExplorerActive)}
+                        >
+                            <img
+                                className="h-full w-full object-center object-cover"
+                                src="/icons/menu-filled.png"
+                            />
+                        </div>
                     </div>
                     <SelectMenu selectedValue={selectedBranch}>
                         {data.branches.length > 0 && data.branches.map((item, idx) => <Option key={idx} item={item} onClick={handleBranchChange} />)}
